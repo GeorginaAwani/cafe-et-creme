@@ -1,0 +1,19 @@
+<?php
+
+namespace app\core;
+
+interface ResponseInterface
+{
+	const STATUS_OK = 200;
+	const STATUS_CREATED = 201;
+	const STATUS_NO_CONTENT = 204;
+
+	const STATUS_BAD_REQUEST = 400;
+	const STATUS_UNAUTHORIZED = 401;
+	const STATUS_FORBIDDEN = 403;
+	const STATUS_NOT_FOUND = 404;
+	const STATUS_METHOD_NOT_ALLOWED = 405;
+
+	const STATUS_INTERNAL_SERVER_ERROR = 500;
+	const STATUS_SERVICE_UNAVAILABLE = 503;
+}

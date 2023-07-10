@@ -1,0 +1,34 @@
+<?php
+
+namespace app\models;
+
+use app\core\db\DBModel;
+
+class {{CLASS}} extends DBModel
+{
+	public function tableName(): string
+	{
+		return '';
+	}
+
+	public function attributes(): array
+	{
+		return [];
+	}
+
+	public function primaryKeyField(): string
+	{
+		return 'id';
+	}
+
+	protected function rules(): array
+	{
+		return [];
+	}
+
+	public function create()
+	{
+
+		return parent::save();
+	}
+}

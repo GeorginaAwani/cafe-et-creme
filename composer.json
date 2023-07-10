@@ -1,0 +1,19 @@
+{
+  "name": "eyitemi/cac",
+  "description": "A demo application for a drinks shop",
+  "autoload": {
+    "psr-4": {
+      "Eyitemi\\Cac\\": "src/",
+      "app\\": "./"
+    }
+  },
+  "authors": [
+    {
+      "name": "Georgina",
+      "email": "georginaawani@gmail.com"
+    }
+  ],
+  "require": {
+    "vlucas/phpdotenv": "^5.5"
+  }
+}

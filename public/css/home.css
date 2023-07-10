@@ -1,0 +1,16 @@
+#featureCircle {
+	width: 45rem;
+	height: 45rem;
+	left: -17%;
+	top: -10%;
+}
+
+.feature-item {
+	background-color: #ffffffde;
+}
+
+.feature-item:hover {
+	transform: translateY(-5px);
+	background-color: #fff;
+	box-shadow: 0 0 15px 0 var(--bs-body-bg);
+}
