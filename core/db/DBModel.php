@@ -125,14 +125,16 @@ abstract class DBModel extends Model
 	 * @param array $columns
 	 * @return array
 	 */
-	public function fetch(string $where, array $params, ?array $columns = null, string $class = static::class)
+	public function fetch(string $where, array $params, ?array $columns = null, string $class = null)
 	{
+		if (is_null($class))
+			$class = static::class;
 		return $this->_getFromTable($where, $params, $columns)->fetchAll(PDO::FETCH_CLASS, $class);
 	}
 
 	protected function saveFile(array $image): string
 	{
-		$file = 'assets/' . md5(uniqid(mt_rand(0, 100000))) . '.' . pathinfo($image['name']);
+		$file = 'images/' . md5(uniqid(mt_rand(0, 100000))) . '.' . pathinfo($image['name']);
 
 		move_uploaded_file($image['tmp_name'], Application::$ROOT . "/public/$file");
 

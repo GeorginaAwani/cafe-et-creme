@@ -1,45 +1,16 @@
-/** NAVBAR **/
+@media screen and (min-width: 769px) {
 
-#mainNav .nav-link::before {
-	content: '';
-	position: absolute;
-	width: 0%;
-	left: 0;
-	right: 0;
-	margin: 0 auto;
-	height: 3px;
-	background-color: var(--secondary-blue);
-	transition: all .3s ease-in;
-	bottom: -13px;
-	border-radius: 3rem;
+	body,
+	html {
+		height: 100%;
+	}
 }
 
-#mainNav .nav-link.active {
-	font-weight: 600;
+#mainNavbar {
+	--bs-nav-link-font-size: 1.5rem;
+	--bs-nav-link-font-weight: lighter;
 }
 
-#mainNav .nav-link.active::before {
-	background-color: var(--primary-blue);
-}
-
-#mainNav .nav-link.active::before,
-#mainNav .nav-link:focus::before,
-#mainNav .nav-link:hover::before {
-	width: 100%;
-}
-
-#cartBtn {
-	width: 2.5rem;
-	height: 2.5rem;
-}
-
-/**
-MAIN
-**/
-#content {
-	/* margin-top: 3.8rem; */
-}
-
-#hero {
-	min-height: 23rem;
+#loginBtn i {
+	color: #BEBEBB;
 }

@@ -1,93 +1,73 @@
+<?php
+
+use app\views\form\Form;
+
+?>
 <link rel="stylesheet" href="/css/home.css">
+<script type="module" src="/js/home.js"></script>
 
-<section id="hero" class="d-flex align-items-center py-5" style="background-color: var(--bs-danger-bg-subtle);">
-	<div class="container py-5">
-		<div class="caption pt-5">
-			<h2 class="h6 text-uppercase text-body-tertiary mb-3">All the flavours of fun</h2>
-			<h1 class="font-heading text-black mb-4 display-5 fw-semibold">
-				<div class="display-4 fw-bolder text-primary-pink">500+</div> flavours to try
-			</h1>
-			<p class="lead mb-4">Our menu offers drinks in all their flavours and with any topping for every season, celebration and feeling.</p>
-
-			<a href="/menu" class="btn btn-primary-pink px-4 py-3 rounded-pill">See our menu <i class="fa-solid ms-2 fa-long-arrow-right"></i></a>
-		</div>
-	</div>
-</section>
-
-<section class="container">
-	<pre>
-		<?= var_dump($_REQUEST) ?>
-	</pre>
-</section>
-
-<section id="intro" class="py-5">
-	<div class="container py-5">
-		<div class="row align-items-center pt-3">
-			<div class="col-md-7"></div>
-			<div class="col-md-5">
-				<h2 class="h6 text-uppercase text-body-tertiary mb-3 fw-bold">We bring the bar to you</h2>
-				<h1 class="font-heading text-black mb-4">A drink for every mood</h1>
-
-				<p class="mb-4">
-					Coffee, tea, wine, ice cream, yoghurt, soda, juice, smoothie, beer, spirit, cocktail; you name it, we've got it. Even water.
-				</p>
-
-				<a href="/menu" class="btn btn-accent px-4 py-3 rounded-pill">Check our menu <i class="fa-solid ms-2 fa-long-arrow-right"></i></a>
+<div class="row h-100">
+	<div class="col-lg-7 px-0">
+		<section id="hero" class="h-100 bg-primary position-relative text-white z-1">
+			<div class="p-3 pt-0 d-flex flex-column justify-content-between h-100">
+				<div class="p-5">
+					<h1 class="display-3 fw-bolder mb-5">Taste<br>
+						The Goodness<br>
+						Of Our Carefully
+						Crafted Drinks</h1>
+					<h2 class="h4 fw-lighter mb-4">Explore our special offers</h2>
+					<?= Form::arrowButton('light', '/menu', 'Our menu') ?>
+				</div>
+				<ul class="mb-0 list-inline h4">
+					<li class="list-inline-item me-3">
+						<a href="" aria-label="Send us an email" class="text-reset"><i class="fa-solid fa-envelope"></i></a>
+					</li>
+					<li class="list-inline-item me-3">
+						<a href="" aria-label="Our Instagram" class="text-reset"><i class="fa-brands fa-instagram"></i></a>
+					</li>
+					<li class="list-inline-item">
+						<a href="" aria-label="Our Twitter" class="text-reset"><i class="fa-brands fa-twitter"></i></a>
+					</li>
+				</ul>
 			</div>
-		</div>
+		</section>
 	</div>
-</section>
+	<div class="col-lg-5 px-0">
+		<main id="main" class="h-100 bg-secondary text-primary">
+			<div class="h-100">
+				<div class="p-5 pb-3 h-100 flex-column d-flex justify-content-between">
+					<div class="">
+						<h1 class="h2 text-primary">What Everyone Likes</h1>
+						<div class="h4 fw-light mb-0">Some of our customer favourites</div>
+					</div>
 
-<section id="features" class="py-5 bg-secondary-blue position-relative overflow-hidden z-1">
-	<div id="featureCircle" class="position-absolute bg-primary-blue rounded-circle z-n1"></div>
-	<div class="container-fluid py-5">
-		<div class="row py-5">
-			<div class="col-md-2 offset-md-1">
-				<h1 class="font-heading h2 text-white mb-4">Your choice to the nitty-gritty details</h1>
-				<p class="text-light mb-0">We care about your drink experience. Customise every order just how you want it from the very best of options.</p>
-			</div>
-			<div class="align-items-center col-md-8 d-flex ps-md-5">
-				<div class="row" id="featureList">
-					<div class="col-md-4">
-						<div class="feature-item ease p-5 rounded-bottom-pill rounded-top-pill text-center h-100">
-							<div class="feature-icon h1 mb-3">
-								<i class="fa-duotone fa-ice-cream text-primary-pink-dark"></i>
-							</div>
-
-							<div class="h5 text-primary-pink-dark">Create your own flavours</div>
-							<p class="small">Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere odio a molestiae explicabo necessitatibus</p>
+					<div id="product" class="text-center mb-3">
+						<div id="productImage" class="mb-2">
+							<img src="/assets/coffee.png" alt="" class="mx-auto">
+						</div>
+						<div id="productName" class="h3 font-script text-primary mb-2">café noir à la crème</div>
+						<!-- <div id="productPrice" class="bg-primary d-inline-block font-script h4 mb-0 px-3 py-2 rounded-3">N6,000</div> -->
+						<div class="position-relative d-inline-block">
+							<div id="productPriceTag" class="position-absolute top-50 translate-middle-y"></div>
+							<div id="productPrice" class="d-inline-block font-script h5 mb-0 pb-2 pe-3 ps-4 pt-2 text-secondary">N6,000</div>
 						</div>
 					</div>
 
-					<div class="col-md-4">
-						<div class="feature-item ease p-5 rounded-bottom-pill rounded-top-pill text-center h-100">
-							<div class="feature-icon h1 mb-3">
-								<i class="fa-duotone fa-donut text-primary-pink-dark"></i>
-							</div>
+					<ul class="list-inline mb-2 mx-auto" id="carouselControls">
+						<li class="list-inline-item mx-3">
+							<button class="btn btn-danger rounded-circle" type="button" aria-current="true" aria-label="Page 1" data-target="1"></button>
+						</li>
 
-							<div class="h5 text-primary-pink-dark">80+ topping options</div>
-							<p class="small">Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere odio a molestiae explicabo necessitatibus</p>
-						</div>
-					</div>
+						<li class="list-inline-item mx-3">
+							<button class="btn btn-danger rounded-circle" type="button" aria-label="Page 2" data-target="2"></button>
+						</li>
 
-					<div class="col-md-4">
-						<div class="feature-item ease p-5 rounded-bottom-pill rounded-top-pill text-center h-100">
-							<div class="feature-icon h1 mb-3">
-								<i class="fa-duotone fa-salad text-primary-pink-dark"></i>
-							</div>
-
-							<div class="h5 text-primary-pink-dark">Healthy goodness</div>
-							<p class="small">Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere odio a molestiae explicabo necessitatibus</p>
-						</div>
-					</div>
+						<li class="list-inline-item mx-3">
+							<button class="btn btn-danger rounded-circle" type="button" aria-label="Page 3" data-target="3"></button>
+						</li>
+					</ul>
 				</div>
 			</div>
-		</div>
+		</main>
 	</div>
-</section>
-
-<script>
-	$(document).ready(function() {
-		$('#mainNav [href="/"]').addClass('active').attr('aria-current', 'page');
-	})
-</script>
+</div>
