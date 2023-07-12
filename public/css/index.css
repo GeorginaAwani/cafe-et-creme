@@ -8,6 +8,7 @@ COLORS
 html {
 	--bs-primary: #51524A !important;
 	--bs-primary-rgb: 81, 82, 74 !important;
+	--bs-primary-light: #97998F;
 
 	--bs-secondary: #D4D0CB !important;
 	--bs-secondary-rgb: 212, 208, 203 !important;
@@ -39,7 +40,7 @@ BUTTONS
 	content: '';
 	width: 100%;
 	position: absolute;
-	height: 1px;
+	height: 2px;
 	background-color: var(--bs-btn-color);
 	right: -1.8rem;
 	transform: translateY(-50%);
@@ -53,10 +54,22 @@ BUTTONS
 	--bs-btn-hover-bg: #c25e66;
 	--bs-btn-hover-border-color: #c25e66;
 	--bs-btn-focus-shadow-rgb: 225, 83, 97;
-	--bs-btn-active-bg: #c25e66;
-	--bs-btn-active-border-color: #a52834;
+	--bs-btn-active-bg: var(--bs-danger);
+	--bs-btn-active-border-color: var(--bs-danger);
 	--bs-btn-disabled-bg: var(--bs-danger);
 	--bs-btn-disabled-border-color: var(--bs-danger);
+}
+
+.btn-outline-primary {
+	--bs-btn-color: var(--bs-primary);
+	--bs-btn-border-color: var(--bs-primary);
+	--bs-btn-hover-bg: var(--bs-primary);
+	--bs-btn-hover-border-color: var(--bs-primary);
+	--bs-btn-focus-shadow-rgb: var(--bs-primary-rgb);
+	--bs-btn-active-bg: var(--bs-primary);
+	--bs-btn-active-border-color: var(--bs-primary);
+	--bs-btn-disabled-color: var(--bs-primary);
+	--bs-btn-disabled-border-color: var(--bs-primary);
 }
 
 
@@ -77,3 +90,62 @@ TRANSITIONS
 /**
 CONTENT
 **/
+.dynamic-text {
+	transition: opacity 0.5s ease-in-out;
+}
+
+.bg-primary-img {
+	transition: background-image 0.5s ease-in-out;
+	background-size: cover;
+}
+
+.bg-primary-img::before {
+	content: '';
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	background-color: rgba(var(--bs-primary-rgb), 0.9);
+	z-index: -1;
+}
+
+/**
+FORM
+**/
+.form-control {
+	color: inherit !important;
+}
+
+*:not(textarea).form-control {
+	height: 3.5rem;
+}
+
+.form-label {
+	left: 2rem;
+	top: -0.5rem;
+}
+
+textarea {
+	resize: none !important;
+	height: 7rem !important;
+}
+
+.floating-group .form-control {
+	padding-left: 5rem !important;
+}
+
+.floating-select {
+	appearance: none;
+	text-indent: 1px;
+}
+
+select::-ms-expand {
+	display: none;
+}
+
+#main .form-label {
+	background-color: var(--bs-secondary);
+}
+
+.text-primary .form-control::placeholder {
+	color: var(--bs-primary-light);
+}

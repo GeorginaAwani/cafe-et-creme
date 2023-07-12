@@ -2,6 +2,8 @@
 
 namespace app\views\form;
 
+use app\views\form\Select;
+
 class Form
 {
 	public static function begin()
@@ -30,22 +32,27 @@ class Form
 		return sprintf('<legend>%s</legend>', $text);
 	}
 
-	public function field($attribute)
+	public function input(string $name, ?string $label = null, string $placeholder = null)
 	{
-		return new Input($attribute);
+		return new Input($name, $label, $placeholder);
 	}
 
-	public function textarea($attribute)
+	public function textarea(string $name, string $label = null, string $placeholder = null)
 	{
-		return new Textarea($attribute);
+		return new Textarea($name, $label, $placeholder);
 	}
 
-	public function submit(string $text, string $class = 'primary')
+	public function select(string $name, string $label = null)
 	{
-		echo sprintf('<button type="submit" class="btn btn-%s">%s</button>', $class, $text);
+		return new Select($name, $label);
 	}
 
-	public static function end()
+	public function submit(string $label, string $outlineClass = 'primary')
+	{
+		return sprintf('<button type="submit" class="btn btn-lg px-5 py-4 rounded-pill btn-outline-%s btn-arrow position-relative" aria-label="%s"><i class="fa-angle-right fa-arrow-icon fa-light position-absolute top-50 translate-middle-y"></i></button>', $outlineClass, $label);
+	}
+
+	public function end()
 	{
 		echo '</form>';
 	}

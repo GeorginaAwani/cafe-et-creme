@@ -1,4 +1,4 @@
-@media screen and (min-width: 769px) {
+@media screen and (min-width: 992px) {
 
 	body,
 	html {
@@ -6,9 +6,41 @@
 	}
 }
 
+#sideNav {
+	width: 20%;
+}
+
+#mainContent {
+	width: 80%;
+	left: 20%;
+}
+
 #mainNavbar {
 	--bs-nav-link-font-size: 1.5rem;
 	--bs-nav-link-font-weight: lighter;
+	--bs-navbar-color: #fff;
+	--bs-navbar-hover-color: var(--bs-secondary);
+	--bs-navbar-active-color: var(--bs-secondary);
+}
+
+#offcanvasNavbar {
+	--bs-offcanvas-bg: var(--bs-primary);
+}
+
+#mainNavbarNav .nav-link::before {
+	content: '';
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	right: 100%;
+	width: 0rem;
+	height: 2px;
+	transition: all .3s ease;
+	background-color: var(--bs-secondary);
+}
+
+#mainNavbarNav .nav-link.active::before {
+	width: 9rem;
 }
 
 #loginBtn i {

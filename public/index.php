@@ -13,6 +13,10 @@ $App = new Application(dirname(__DIR__), User::class);
 
 $App->Router->get('/', [SiteController::class, 'home']);
 
+$App->Router->get('/about', [SiteController::class, 'about']);
+
+$App->Router->get('/contact', [SiteController::class, 'contact']);
+
 $App->Router->get('/menu', [SiteController::class, 'menu']);
 
 $App->Router->get('/login', [AuthController::class, 'login']);
