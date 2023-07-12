@@ -104,7 +104,7 @@ use app\views\form\Form;
 					</div>
 
 					<div class="mb-4 position-relative">
-						<?= $Form->textarea('email', 'How can we help', 'Let us know how we can help you...') ?>
+						<?= $Form->textarea('message', 'How can we help', 'Let us know how we can help you...') ?>
 					</div>
 
 					<div class="pe-4 text-end">

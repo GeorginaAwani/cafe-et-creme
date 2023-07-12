@@ -6,22 +6,20 @@ use app\core\Migration;
 /**
  * Migrations are database changes. The order migrations are executed is every important. We start with a letter because the class must start with a letter
  */
-class m_1688653561_create_users_table extends Migration
+class m_1689152846_create_contact_table extends Migration
 {
 	public function up()
 	{
-		$this->db->create('users', [
+		$this->db->create('contact', [
 			$this->db->field()->name('id')->type(DatabaseField::INT)->primaryKey(),
 			$this->db->field()->name('name')->type(DatabaseField::VARCHAR)->size(50),
-			$this->db->field()->name('email')->type(DatabaseField::VARCHAR)->size(255)->unique(),
-			$this->db->field()->name('password')->type(DatabaseField::VARCHAR)->size(512),
-			$this->db->field()->name('status')->type(DatabaseField::INT)
+			$this->db->field()->name('phone')->type(DatabaseField::VARCHAR)->size(30),
+			$this->db->field()->name('message')->type(DatabaseField::TEXT),
 		]);
 	}
 
 	public function down()
 	{
-		// drop users
-		$this->db->drop('users');
+		$this->db->drop('contact');
 	}
 }
