@@ -42,7 +42,7 @@ class CartItem extends DBModel
 			$this->db()->startTransaction();
 
 			$rules = [
-				'container_id' => [self::RULE_REQUIRED, [self::RULE_EXISTS, 'id', Container::tableName()]],
+				'container_id' => [self::RULE_REQUIRED, [self::RULE_EXISTS, 'column' => 'id', 'table' => Container::tableName(), 'record' => 'conatiner']],
 				'quantity' => [self::RULE_REQUIRED],
 			];
 

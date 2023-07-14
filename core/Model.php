@@ -12,11 +12,15 @@ abstract class Model
 	public const RULE_IMAGE = 4;
 	public const RULE_PRICE = 5;
 	public const RULE_EXISTS = 6;
+	public const RULE_NUMERIC = 7;
+	public const RULE_MIN = 8;
+	public const RULE_MAX = 9;
+	public const RULE_MATCH = 10;
 
-	public function loadData(array $data = null)
+	public function loadData()
 	{
 		// get request body
-		if (!$data) $data = Application::$App->Request->body();
+		$data = Application::$App->Request->body();
 
 		foreach ($data as $key => $value) {
 			if (property_exists($this, $key)) $this->$key = $value;
@@ -33,11 +37,16 @@ abstract class Model
 			self::RULE_EMAIL => 'Invalid email address',
 			self::RULE_UNIQUE => '{field} already exists',
 			self::RULE_IMAGE => 'Invalid image file',
-			self::RULE_PRICE => 'Price must be more than 0'
+			self::RULE_PRICE => 'Price must be more than 0',
+			self::RULE_EXISTS => '{record} not found',
+			self::RULE_MAX => 'Must not exceed {max} characters',
+			self::RULE_MIN => '{field} must be at least {min} characters',
+			self::RULE_NUMERIC => '{field} must be a valid number',
+			self::RULE_MATCH => 'Passwords must match',
 		];
 	}
 
-	private function throw_error(int $rule, array $params = [])
+	private function throw_error(string $attribute, int $rule, array $params = [])
 	{
 		$message = $this->error_messages()[$rule] ?? '';
 
@@ -45,7 +54,7 @@ abstract class Model
 			$message = str_replace("{{$key}}", $value, $message);
 		}
 
-		throw new FormException($message);
+		throw new FormException("$attribute : " . ucfirst($message));
 	}
 
 	/**
@@ -84,13 +93,35 @@ abstract class Model
 							$error = true;
 						break;
 					case self::RULE_EXISTS:
-						if (!$this->validate_existence($rule[1], $rule[2], $value))
+						if (!$this->validate_existence($rule['column'], $rule['table'], $value))
+							$error = true;
+						break;
+					case self::RULE_NUMERIC:
+						if (!is_numeric($value))
+							$error = true;
+						break;
+					case self::RULE_MIN:
+						if (strlen($value) < $rule['min'])
+							$error = true;
+						break;
+					case self::RULE_MAX:
+						if (strlen($value) > $rule['max'])
+							$error = true;
+						break;
+					case self::RULE_MATCH:
+						$a = $rule['attribute'];
+						if ($value !== $this->$a)
 							$error = true;
 						break;
 				}
 
+				$errorRule = ['field' => str_replace('_', ' ', $attribute)];
+
+				if (is_array($rule))
+					$errorRule = array_merge($rule, $errorRule);
+
 				if ($error) {
-					$this->throw_error($ruleName, ['field' => $attribute]);
+					$this->throw_error($attribute, $ruleName, $errorRule);
 				}
 			}
 		}
@@ -112,6 +143,6 @@ abstract class Model
 	}
 	private function validate_uniqueness(string $class, string $attribute)
 	{
-		return !$this->validate_existence($attribute, $class::tableName(), $this->$attribute) ?? false;
+		return (!$this->validate_existence($attribute, $class::tableName(), $attribute)) ?? false;
 	}
 }

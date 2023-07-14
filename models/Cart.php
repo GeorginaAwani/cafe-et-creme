@@ -56,7 +56,7 @@ class Cart extends DBModel
 	 * Creates a cart if none exists and returns the cart id
 	 * @return string|int
 	 */
-	public function create()
+	public function save()
 	{
 		// check if a cart exists and
 		$cart = $this->fetch_cart_from_db();

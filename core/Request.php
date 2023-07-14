@@ -8,7 +8,7 @@ namespace app\core;
 class Request
 {
 	private const REQUEST_GET = 'get';
-	private const REQUEST_POST = 'POST';
+	private const REQUEST_POST = 'post';
 	private const REQUEST_PUT = 'put';
 	private const REQUEST_DELETE = 'delete';
 	/**

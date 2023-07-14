@@ -3,6 +3,7 @@
 /** We need to require our autoload file */
 
 use app\controllers\AuthController;
+use app\controllers\MenuController;
 use app\controllers\SiteController;
 use app\core\Application;
 use app\models\User;
@@ -15,14 +16,18 @@ $App->Router->get('/', [SiteController::class, 'home']);
 
 $App->Router->get('/about', [SiteController::class, 'about']);
 
-$App->Router->get('/contact', [SiteController::class, 'contact']);
+$App->Router->get('/contact', [SiteController::class, 'renderContact']);
 
-$App->Router->get('/menu', [SiteController::class, 'menu']);
+$App->Router->post('/api/contact', [SiteController::class, 'handleContact']);
 
-$App->Router->get('/login', [AuthController::class, 'login']);
+$App->Router->get('/menu', [MenuController::class, 'menu']);
 
-$App->Router->get('/signup', [AuthController::class, 'signup']);
+$App->Router->get('/login', [AuthController::class, 'renderLogin']);
 
-// $App->Router->get()
+$App->Router->post('/api/login', [AuthController::class, 'handleLogin']);
+
+$App->Router->get('/signup', [AuthController::class, 'renderSignup']);
+
+$App->Router->post('/api/signup', [AuthController::class, 'handleSignup']);
 
 $App->run();

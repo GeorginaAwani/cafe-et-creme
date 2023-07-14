@@ -8,6 +8,13 @@ abstract class Field
 	public string $name;
 	public string $label;
 	public string $placeholder = '';
+	public bool $required = false;
+	public bool $readonly = false;
+	/**
+	 * Color of border
+	 * @var string
+	 */
+	public string $color = 'primary';
 
 	function __construct(string $name, ?string $label = null, ?string $placeholder = null)
 	{
@@ -17,6 +24,32 @@ abstract class Field
 	}
 
 	abstract public function render(): string;
+
+	public function color(string $color)
+	{
+		$this->color = $color;
+		return $this;
+	}
+
+	/**
+	 * Set field to be required
+	 * @return Field
+	 */
+	public function required()
+	{
+		$this->required = true;
+		return $this;
+	}
+
+	/**
+	 * Set field to be readonly
+	 * @return Field
+	 */
+	public function readonly()
+	{
+		$this->required = true;
+		return $this;
+	}
 
 	public function __toString()
 	{

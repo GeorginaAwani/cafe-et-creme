@@ -1,0 +1,16 @@
+@media screen and (min-width: 992px) {
+
+	body,
+	html {
+		height: 100%;
+	}
+
+	#hero {
+		position: fixed !important;
+		height: 100%;
+	}
+
+	#main {
+		left: 58.33333333%;
+	}
+}

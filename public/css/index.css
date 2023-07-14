@@ -9,12 +9,16 @@ html {
 	--bs-primary: #51524A !important;
 	--bs-primary-rgb: 81, 82, 74 !important;
 	--bs-primary-light: #97998F;
+	--bs-primary-dark: var(--bs-primary);
 
 	--bs-secondary: #D4D0CB !important;
 	--bs-secondary-rgb: 212, 208, 203 !important;
 
 	--bs-danger: #A0616A !important;
 	--bs-danger-rgb: 160, 97, 106 !important;
+
+	--bs-form-invalid-color: var(--bs-danger);
+	--bs-form-invalid-border-color: var(--bs-danger);
 }
 
 
@@ -48,6 +52,11 @@ BUTTONS
 	transition: all .15s ease-in-out;
 }
 
+.btn-primary.btn-arrow::before {
+	background-color: var(--bs-primary);
+	z-index: -1;
+}
+
 .btn-danger {
 	--bs-btn-bg: var(--bs-danger);
 	--bs-btn-border-color: var(--bs-danger);
@@ -72,6 +81,22 @@ BUTTONS
 	--bs-btn-disabled-border-color: var(--bs-primary);
 }
 
+.btn-primary {
+	--bs-btn-color: var(--bs-secondary);
+	--bs-btn-bg: var(--bs-primary);
+	--bs-btn-border-color: var(--bs-primary);
+	--bs-btn-hover-color: var(--bs-secondary);
+	--bs-btn-hover-bg: var(--bs-primary-dark);
+	--bs-btn-hover-border-color: var(--bs-primary-dark);
+	--bs-btn-focus-shadow-rgb: 49, 132, 253;
+	--bs-btn-active-color: var(--bs-secondary);
+	--bs-btn-active-bg: var(--bs-primary-dark);
+	--bs-btn-active-border-color: var(--bs-primary-dark);
+	--bs-btn-disabled-color: var(--bs-secondary);
+	--bs-btn-disabled-bg: var(--bs-primary-light);
+	--bs-btn-disabled-border-color: var(--bs-primary-light);
+}
+
 
 /**
 NAVBAR
@@ -94,18 +119,25 @@ CONTENT
 	transition: opacity 0.5s ease-in-out;
 }
 
-.bg-primary-img {
+.bg-img {
 	transition: background-image 0.5s ease-in-out;
 	background-size: cover;
 }
 
-.bg-primary-img::before {
+.bg-img::before {
 	content: '';
 	position: absolute;
-	height: 100%;
+	min-height: 100%;
 	width: 100%;
-	background-color: rgba(var(--bs-primary-rgb), 0.9);
 	z-index: -1;
+}
+
+.bg-img.bg-primary-img::before {
+	background-color: rgba(var(--bs-primary-rgb), 0.9);
+}
+
+.bg-img.bg-secondary-img::before {
+	background-color: rgba(var(--bs-secondary-rgb), 0.9);
 }
 
 /**
@@ -142,10 +174,42 @@ select::-ms-expand {
 	display: none;
 }
 
-#main .form-label {
+.text-primary .form-control::placeholder {
+	color: var(--bs-primary-light);
+}
+
+.form-error:empty {
+	display: none;
+}
+
+.bg-secondary .form-label {
 	background-color: var(--bs-secondary);
 }
 
-.text-primary .form-control::placeholder {
-	color: var(--bs-primary-light);
+.bg-primary .form-label {
+	background-color: var(--bs-primary);
+}
+
+.password-switch {
+	top: 0.7rem;
+}
+
+.password-switch::before {
+	content: '';
+	width: 1px;
+	height: 0;
+	background-color: currentColor;
+	position: absolute;
+	transition: .2s ease-out;
+	left: 50%;
+	top: 50%;
+	transform: translateY(-50%) rotate(45deg);
+}
+
+.password-switch.active::before {
+	min-height: 100%;
+}
+
+.form-control.is-invalid {
+	border-color: var(--bs-danger) !important;
 }

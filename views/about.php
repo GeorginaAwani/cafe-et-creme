@@ -12,7 +12,7 @@ use app\views\form\Form;
 
 <div class="row h-100">
 	<div class="col-lg-7 px-0">
-		<section id="main" class="h-100 bg-secondary text-primary z-1">
+		<section class="h-100 bg-secondary text-primary z-1">
 			<div class="px-3 h-100">
 				<div class="p-5">
 					<h1 class="display-3 fw-bolder mb-5">Get To Know Us</h1>
@@ -28,7 +28,7 @@ use app\views\form\Form;
 		</section>
 	</div>
 	<div class="col-lg-5 px-0">
-		<section id="aside" class="h-100 bg-primary position-relative bg-primary-img z-1 text-secondary">
+		<section class="h-100 bg-primary position-relative bg-primary-img bg-img z-1 text-secondary">
 			<div class="p-5 pb-4 h-100">
 				<div class="pt-5 px-3 d-flex flex-column h-100 justify-content-between">
 					<div class="">
@@ -42,17 +42,7 @@ use app\views\form\Form;
 							<p class="lead">To be the ultimate destination for extraordinary drinks, creating cherished memories and becoming an integral part of our customers' lives.</p>
 						</div>
 					</div>
-					<ul class="mb-0 list-inline h4 text-white">
-						<li class="list-inline-item me-3">
-							<a href="" aria-label="Send us an email" class="text-reset"><i class="fa-solid fa-envelope"></i></a>
-						</li>
-						<li class="list-inline-item me-3">
-							<a href="" aria-label="Our Instagram" class="text-reset"><i class="fa-brands fa-instagram"></i></a>
-						</li>
-						<li class="list-inline-item">
-							<a href="" aria-label="Our Twitter" class="text-reset"><i class="fa-brands fa-twitter"></i></a>
-						</li>
-					</ul>
+					<?php include_once __DIR__ . '/components/full-contact-list.php' ?>
 				</div>
 			</div>
 		</section>

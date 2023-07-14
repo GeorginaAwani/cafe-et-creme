@@ -1,4 +1,5 @@
-import $ from "jquery";
+"use strict";
+// import $ from "jquery";
 $(function () {
     const carousel = [
         {

@@ -6,7 +6,7 @@ use app\core\db\DBModel;
 
 class {{CLASS}} extends DBModel
 {
-	public function tableName(): string
+	public static function tableName(): string
 	{
 		return '';
 	}
@@ -15,18 +15,8 @@ class {{CLASS}} extends DBModel
 	{
 		return [];
 	}
-
-	public function primaryKeyField(): string
-	{
-		return 'id';
-	}
-
-	protected function rules(): array
-	{
-		return [];
-	}
-
-	public function create()
+	
+	public function save()
 	{
 
 		return parent::save();

@@ -8,7 +8,7 @@ use app\views\form\Form;
 
 <div class="row h-100">
 	<div class="col-lg-7 px-0">
-		<section id="hero" class="h-100 bg-primary position-relative text-white z-1 bg-primary-img">
+		<section id="hero" class="h-100 bg-primary position-relative text-white z-1 bg-primary-img bg-img">
 			<div class="p-3 pt-0 d-flex flex-column justify-content-between h-100">
 				<div class="p-5">
 					<h1 class="display-3 fw-bolder mb-5 dynamic-text" id="heroTitle">Taste<br>
@@ -20,22 +20,12 @@ use app\views\form\Form;
 						<?= Form::arrowButton('light', '/menu', 'Our menu') ?>
 					</div>
 				</div>
-				<ul class="mb-0 list-inline h4">
-					<li class="list-inline-item me-3">
-						<a href="" aria-label="Send us an email" class="text-reset"><i class="fa-solid fa-envelope"></i></a>
-					</li>
-					<li class="list-inline-item me-3">
-						<a href="" aria-label="Our Instagram" class="text-reset"><i class="fa-brands fa-instagram"></i></a>
-					</li>
-					<li class="list-inline-item">
-						<a href="" aria-label="Our Twitter" class="text-reset"><i class="fa-brands fa-twitter"></i></a>
-					</li>
-				</ul>
+				<?php include_once __DIR__ . '/components/full-contact-list.php' ?>
 			</div>
 		</section>
 	</div>
 	<div class="col-lg-5 px-0">
-		<section id="main" class="h-100 bg-secondary text-primary">
+		<section class="h-100 bg-secondary text-primary">
 			<div class="h-100">
 				<div class="p-5 pb-3 h-100 flex-column d-flex justify-content-between">
 					<div class="">

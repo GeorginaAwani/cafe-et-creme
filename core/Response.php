@@ -19,13 +19,16 @@ class Response implements ResponseInterface
 	{
 		if ($error instanceof UserException) {
 			$code = $error->getCode();
-			$message = $error->getMessage();
+			$message = ['error' => $error->getMessage()];
 		} else {
 			$code = self::STATUS_INTERNAL_SERVER_ERROR;
-			$message = is_string($error) ? $error : "Something went wrong";
+			$message = is_string($error) ? $error :
+			/** "Something went wrong" */
+			$error->getMessage();
+			$message = ['error' => $message];
 		}
 
-		$this->_send(['error' => $message], $code);
+		$this->_send($message, $code);
 	}
 
 	private function _send(array $data, int $status)

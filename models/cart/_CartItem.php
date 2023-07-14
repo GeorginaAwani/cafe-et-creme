@@ -8,11 +8,6 @@ abstract class _CartItem extends DBModel
 {
 	public int $item_id = 0;
 
-	public function primaryKeyField(): string
-	{
-		return 'id';
-	}
-
 	public function attributes(): array
 	{
 		return ['item_id', 'id'];

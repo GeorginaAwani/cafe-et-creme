@@ -19,6 +19,10 @@ abstract class DBModel extends Model
 	public int $id = 0;
 	abstract static public function tableName(): string;
 
+	/**
+	 * Attributes listed here must exist in the database table
+	 * @return array
+	 */
 	abstract public function attributes(): array;
 
 	protected function db(): Database
@@ -99,9 +103,12 @@ abstract class DBModel extends Model
 
 		$sql = "SELECT $columns FROM $table WHERE $where";
 		if (!empty($others)) {
+			$otherSQL = ' ';
 			foreach ($others as $name => $value) {
-				$sql .= $name . ' ' . $value;
+				$otherSQL .= $name . ' ' . $value;
 			}
+
+			$sql .= $otherSQL;
 		}
 		return $this->db()->prepare($sql, $params);
 	}

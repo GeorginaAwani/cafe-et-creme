@@ -64,7 +64,7 @@ class Application
 	{
 		// save user in session
 		$this->user = $user;
-		$this->Session->set('user', $user->{$user->primaryKeyField()});
+		$this->Session->set('user', $user->id);
 
 		return true;
 	}

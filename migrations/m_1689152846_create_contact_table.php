@@ -13,6 +13,8 @@ class m_1689152846_create_contact_table extends Migration
 		$this->db->create('contact', [
 			$this->db->field()->name('id')->type(DatabaseField::INT)->primaryKey(),
 			$this->db->field()->name('name')->type(DatabaseField::VARCHAR)->size(50),
+			$this->db->field()->name('email')->type(DatabaseField::VARCHAR)->size(255),
+			$this->db->field()->name('country_code')->type(DatabaseField::TINYINT)->size(3),
 			$this->db->field()->name('phone')->type(DatabaseField::VARCHAR)->size(30),
 			$this->db->field()->name('message')->type(DatabaseField::TEXT),
 		]);

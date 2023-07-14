@@ -21,7 +21,7 @@ class Login extends Model
 
 		$this->validate($rules);
 
-		$user = $User->fetchOne("'email = :email'", [':email' => $this->email]);
+		$user = $User->fetchOne("email = :email", [':email' => $this->email]);
 
 		if (!$user || !password_verify($this->password, $user->password)) {
 			throw new FormException("Invalid log in credentials");

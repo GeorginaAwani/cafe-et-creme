@@ -19,12 +19,6 @@ class Topping extends DBModel
 	{
 		return ['name', 'description', 'price', 'image'];
 	}
-
-	public function primaryKeyField(): string
-	{
-		return 'id';
-	}
-
 	protected function rules(): array
 	{
 		return [
@@ -35,7 +29,7 @@ class Topping extends DBModel
 		];
 	}
 
-	public function create()
+	public function save()
 	{
 		$this->image = $this->saveFile($this->image);
 		return parent::save();

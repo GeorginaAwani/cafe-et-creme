@@ -50,7 +50,7 @@ class CartController extends Controller
 	{
 		$Cart = new Cart;
 		$CartItem = new CartItem;
-		$CartItem->cart_id = $Cart->create();
+		$CartItem->cart_id = $Cart->save();
 		$CartItem->loadData();
 		return $CartItem;
 	}

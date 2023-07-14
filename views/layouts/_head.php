@@ -15,6 +15,7 @@
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script> -->
 
 <link rel="stylesheet" href="/css/index.css">
+<script type="module" src="/js/index.js"></script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

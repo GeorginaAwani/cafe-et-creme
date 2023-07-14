@@ -4,18 +4,20 @@
 	html {
 		height: 100%;
 	}
+
+	#sideNav {
+		width: 20%;
+		height: 100%;
+		position: fixed;
+	}
+
+	#main {
+		width: 80%;
+		margin-left: 20%;
+	}
 }
 
-#sideNav {
-	width: 20%;
-}
-
-#mainContent {
-	width: 80%;
-	left: 20%;
-}
-
-#mainNavbar {
+#navbar {
 	--bs-nav-link-font-size: 1.5rem;
 	--bs-nav-link-font-weight: lighter;
 	--bs-navbar-color: #fff;
@@ -27,7 +29,7 @@
 	--bs-offcanvas-bg: var(--bs-primary);
 }
 
-#mainNavbarNav .nav-link::before {
+#navbarNav .nav-link::before {
 	content: '';
 	position: absolute;
 	top: 50%;
@@ -39,7 +41,7 @@
 	background-color: var(--bs-secondary);
 }
 
-#mainNavbarNav .nav-link.active::before {
+#navbarNav .nav-link.active::before {
 	width: 9rem;
 }
 

@@ -5,7 +5,7 @@ namespace app\views\form;
 class Select extends Field
 {
 	private array $options = [];
-	function __construct(string $name, ?string $label = null)
+	function __construct(string $name, string $label = '')
 	{
 		parent::__construct($name, $label, null);
 	}
@@ -24,10 +24,13 @@ class Select extends Field
 	public function render(): string
 	{
 		return sprintf(
-			'<select id="%s" name="%s" class="bg-transparent border-primary form-control pt-3 px-5 rounded-pill">%s</select>',
+			'<select id="%s" name="%s" class="bg-transparent border-%s form-control pt-3 px-5 rounded-pill" %s %s>%s</select>',
 			$this->name,
 			$this->name,
-			$this->get_options()
+			$this->color,
+			$this->get_options(),
+			$this->readonly ? 'readonly' : '',
+			$this->required ? 'required' : ''
 		);
 	}
 }

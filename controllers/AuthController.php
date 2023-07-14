@@ -2,7 +2,6 @@
 
 namespace app\controllers;
 
-use app\core\Application;
 use app\core\Controller;
 use app\core\exceptions\FormException;
 use app\models\Login;
@@ -15,10 +14,20 @@ class AuthController extends Controller
 		$this->layout = 'auth';
 	}
 
-	public function login()
+	public function renderLogin(): void
+	{
+		die($this->render('login'));
+	}
+
+	public function renderSignup(): void
+	{
+		die($this->render('signup'));
+	}
+
+	public function handleLogin()
 	{
 		// use is logging in
-		if (Application::$App->Request->isPost()) {
+		if ($this->request()->isPost() && $this->request()->isAjaxRequest()) {
 			try {
 				$User = new User;
 				$Login = new Login;
@@ -36,34 +45,29 @@ class AuthController extends Controller
 				$this->response()->sendError($e);
 			}
 		}
-
-		// render view
-		die($this->render('login'));
 	}
 
-	public function signup()
+	public function handleSignup()
 	{
 		// user is submitting the form
-		if (Application::$App->Request->isPost()) {
+		if ($this->request()->isPost() && $this->request()->isAjaxRequest()) {
 			try {
 				// create an instance of the user class
 				$User = new User;
 				$User->loadData(); // load data from form into model
 
-				if ($User->create()) {
+				if ($User->save()) {
 					$this->response()->sendSuccess([
 						'message' => "Account created successfully",
 						'redirect' => '/login'
 					]);
 				} else {
-					throw new FormException("Something went wrong");
+					throw new FormException("Failed to create accunt");
 				}
 			} catch (\Throwable $e) {
 				$this->response()->sendError($e);
 				exit;
 			}
 		}
-
-		die($this->render('signup'));
 	}
 }

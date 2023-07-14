@@ -29,13 +29,16 @@ class Drink extends DBModel
 			'name' => [self::RULE_REQUIRED],
 			'description' => [self::RULE_REQUIRED],
 			'price' => [self::RULE_REQUIRED, self::RULE_PRICE],
-			'category' => [self::RULE_REQUIRED, [self::RULE_EXISTS, 'id', 'category']],
+			'category' => [
+				self::RULE_REQUIRED,
+				[self::RULE_EXISTS, 'column' => 'id', 'table' => 'category', 'record' => 'category']
+			],
 			'is_alcoholic' => [self::RULE_REQUIRED],
 			'image' => [self::RULE_REQUIRED, self::RULE_IMAGE],
 		];
 	}
 
-	public function create()
+	public function save()
 	{
 		$this->image = $this->saveFile($this->image);
 		return parent::save();

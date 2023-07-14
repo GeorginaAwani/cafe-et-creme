@@ -11,7 +11,7 @@ class MenuController extends Controller
 	private $search = '';
 	public function __construct()
 	{
-		$this->layout = 'main';
+		$this->layout = 'app';
 		$this->_getQuery();
 	}
 
@@ -22,16 +22,8 @@ class MenuController extends Controller
 			$this->search = $query['search'];
 	}
 
-	public function drinks()
+	public function menu()
 	{
-		$Menu = new Menu;
-		$this->response()->data = $Menu->drinks();
-		return $this->response()->send();
-	}
-
-	public function toppings()
-	{
-		$Menu = new Menu;
-		// $this->response()->data = $Menu->
+		echo $this->render('menu');
 	}
 }
