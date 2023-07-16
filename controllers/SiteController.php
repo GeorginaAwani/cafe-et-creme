@@ -34,7 +34,7 @@ class SiteController extends Controller
 	public function handleContact(): void
 	{
 		// submit contact
-		if (Application::$App->Request->isPost() && Application::$App->Request->isAjaxRequest()) {
+		if (Application::$App->Request->isPost() && Application::$App->Request->isAPIRequest()) {
 			try {
 				$Contact = new Contact;
 				$Contact->loadData();

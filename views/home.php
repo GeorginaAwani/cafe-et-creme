@@ -35,7 +35,7 @@ use app\views\form\Form;
 
 					<div id="product" class="text-center mb-3">
 						<div id="productImage" class="mb-2">
-							<img src="/assets/coffee.png" alt="" class="mx-auto">
+							<img src="/images/coffee.png" alt="" class="mx-auto">
 						</div>
 						<div id="productName" class="h3 font-script text-primary mb-2 dynamic-text">Cappuccino</div>
 						<div class="position-relative d-inline-block">

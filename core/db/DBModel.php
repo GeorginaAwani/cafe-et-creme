@@ -95,11 +95,16 @@ abstract class DBModel extends Model
 		return $this->db()->delete($this->tableName(), $this->stringColumns($columns), $set);
 	}
 
-	private function _getFromTable(string $where, array $params, ?array $columns = null, ?array $others = [])
+	private function _getFromTable(?string $where = null, ?array $params = null, ?array $columns = null, ?array $others = [])
 	{
 		$table = static::tableName();
 
 		$columns = is_null($columns) ? '*' : implode(', ', $columns);
+
+		if (!$where) {
+			$where = "1 IS TRUE";
+			$params = [];
+		}
 
 		$sql = "SELECT $columns FROM $table WHERE $where";
 		if (!empty($others)) {
@@ -120,9 +125,11 @@ abstract class DBModel extends Model
 	 * @param array $columns
 	 * @return bool|object
 	 */
-	public function fetchOne(string $where, array $params, array $columns = null)
+	public function fetchOne(?string $where = null, ?array $params = null, array $columns = null, string $class = null)
 	{
-		return $this->_getFromTable($where, $params, $columns, ['LIMIT' => 1])->fetchObject(static::class);
+		if (is_null($class))
+			$class = static::class;
+		return $this->_getFromTable($where, $params, $columns, ['LIMIT' => 1])->fetchObject($class);
 	}
 
 	/**
@@ -132,7 +139,7 @@ abstract class DBModel extends Model
 	 * @param array $columns
 	 * @return array
 	 */
-	public function fetch(string $where, array $params, ?array $columns = null, string $class = null)
+	public function fetch(?string $where = null, ?array $params = null, ?array $columns = null, string $class = null)
 	{
 		if (is_null($class))
 			$class = static::class;

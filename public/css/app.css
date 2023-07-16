@@ -1,0 +1,31 @@
+html {
+	height: 100%;
+}
+
+body,
+#mainWrap {
+	min-height: 100vh;
+}
+
+/* NAVBAR */
+#iconNav .nav-link {
+	color: var(--bs-secondary) !important;
+}
+
+#search {
+	font-size: 1.5rem;
+	padding-left: 4rem !important;
+}
+
+#navbar .nav-link::before {
+	bottom: 100%;
+	transform: translateY(50%);
+	right: 50%;
+	width: 2px;
+	height: 0rem;
+	margin-bottom: 10px;
+}
+
+#navbar .nav-link.active::before {
+	height: 3rem;
+}

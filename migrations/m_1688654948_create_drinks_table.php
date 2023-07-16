@@ -1,5 +1,6 @@
 <?php
 
+use app\core\db\Database;
 use app\core\db\DatabaseField;
 use app\core\Migration;
 
@@ -15,6 +16,7 @@ class m_1688654948_create_drinks_table extends Migration
 			$this->db->field()->name('name')->type(DatabaseField::VARCHAR)->size(50),
 			$this->db->field()->name('description')->type(DatabaseField::TEXT),
 			$this->db->field()->name('category')->type(DatabaseField::INT)->foreignKey('id', 'categories'),
+			$this->db->field()->name('quantity_in_store')->type(DatabaseField::INT),
 			$this->db->field()->name('is_alcoholic')->type(DatabaseField::BOOLEAN),
 			$this->db->field()->name('image')->type(DatabaseField::VARCHAR)->size(512),
 			$this->db->field()->name('price')->type(DatabaseField::DECIMAL)->size('10,2'),

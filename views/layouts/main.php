@@ -12,7 +12,7 @@
 	<div class="container-fluid h-100">
 		<div class="row h-100">
 			<aside class="col-lg-3 px-0" id="sideNav">
-				<nav class="bg-primary border-2 border-end h-100 navbar sticky-top navbar-dark navbar-expand-lg px-lg-5 py-lg-4" id="navbar">
+				<nav class="bg-primary border-2 border-end h-100 navbar sticky-top navbar-dark navbar-expand-lg px-lg-5 py-lg-4 overflow-auto" id="navbar">
 					<div class="h-100 d-flex flex-lg-column px-3 px-lg-0 justify-content-between justify-content-lg-start w-100">
 						<a class="navbar-brand m-0 font-script" href="/">Café et Crème</a>
 						<button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">

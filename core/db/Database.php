@@ -66,6 +66,11 @@ class Database
 		return $this->exec("DROP TABLE {$table}");
 	}
 
+	public function truncate(string $table)
+	{
+		return $this->exec("TRUNCATE TABLE {$table}");
+	}
+
 	public function query(string $sql)
 	{
 		return $this->pdo->query($sql);

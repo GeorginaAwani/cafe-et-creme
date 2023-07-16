@@ -17,28 +17,16 @@
 	}
 }
 
-#navbar {
-	--bs-nav-link-font-size: 1.5rem;
-	--bs-nav-link-font-weight: lighter;
-	--bs-navbar-color: #fff;
-	--bs-navbar-hover-color: var(--bs-secondary);
-	--bs-navbar-active-color: var(--bs-secondary);
-}
-
 #offcanvasNavbar {
 	--bs-offcanvas-bg: var(--bs-primary);
 }
 
 #navbarNav .nav-link::before {
-	content: '';
-	position: absolute;
 	top: 50%;
 	transform: translateY(-50%);
 	right: 100%;
 	width: 0rem;
 	height: 2px;
-	transition: all .3s ease;
-	background-color: var(--bs-secondary);
 }
 
 #navbarNav .nav-link.active::before {

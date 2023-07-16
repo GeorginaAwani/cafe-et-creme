@@ -1,6 +1,5 @@
 <?php
 
-use app\core\db\DatabaseField;
 use app\core\Migration;
 
 /**

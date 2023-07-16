@@ -32,17 +32,17 @@ $(function () {
     ];
     const products = [
         {
-            image: "/assets/coffee.png",
+            image: "/images/coffee.png",
             name: "Cappuccino",
             price: 6000,
         },
         {
-            image: "/assets/orange-juice.png",
+            image: "/images/orange-juice.png",
             name: "Fresh orange juice",
             price: 3500,
         },
         {
-            image: "/assets/cocktail.png",
+            image: "/images/cocktail.png",
             name: "Mojito Cocktail",
             price: 4500,
         },

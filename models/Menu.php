@@ -3,6 +3,7 @@
 namespace app\models;
 
 use app\core\Model;
+use app\models\products\Container;
 use app\models\products\Drink;
 use app\models\products\Topping;
 
@@ -15,44 +16,73 @@ class Menu extends Model
 		return [];
 	}
 
-	/**
-	 * Attach search clause if search is available
-	 * @return array
-	 */
-	private function _where()
+	public function search()
 	{
-		$where = '';
-		$params = [];
-
-		if ($this->search) {
-			$where = "name LIKE :search OR description LIKE :search";
-			$params = [':search' => '%' . $this->search . '%'];
-		}
-
-		return [$where, $params];
+		// search here
 	}
 
 	/**
 	 * Display drink menu
-	 * @return array<array>
 	 */
-	public function drinks()
+	public function getDrinks(?string $category = null)
 	{
 		$drink = new Drink;
-		$where = $this->_where();
 
-		return ['drinks' => $drink->fetch($where[0], $where[1])];
+		$where = '';
+		$params = [];
+
+		if ($category) {
+			// get category id
+			$Category = new Category;
+			$id = $Category->fetchOne("name = :name", [':name' => $category], ['id'])->id;
+			$where = " AND category = :cid";
+			$params = [':cid' => $id];
+		}
+
+		return ['drinks' => $drink->fetch($where, $params)];
+	}
+
+	/**
+	 * Get a drink
+	 */
+	public function getDrink(int $drink)
+	{
+		$Drink = new _Drink;
+		$Drink->id = $drink;
+		return ['drink' => $Drink->get()];
 	}
 
 	/**
 	 * Display topping menu
 	 * @return array<array>
 	 */
-	public function toppings()
+	public function toppings(?int $topping = null)
 	{
-		$topping = new Topping;
-		$where = $this->_where();
+		$Topping = new Topping;
 
-		return ['toppings' => $topping->fetch($where[0], $where[1])];
+		if ($topping) {
+			return [
+				'topping' => $Topping->fetchOne("id = :name", [':id' => $topping])
+			];
+		}
+
+		return ['toppings' => $Topping->fetch()];
+	}
+
+	/**
+	 * Display container menu
+	 * @return array<array>
+	 */
+	public function containers(?int $container = null)
+	{
+		$Container = new Container;
+
+		if ($container) {
+			return [
+				'container' => $Container->fetchOne("id = :name", [':id' => $container])
+			];
+		}
+
+		return ['containers' => $Container->fetch()];
 	}
 }

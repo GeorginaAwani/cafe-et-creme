@@ -3,7 +3,6 @@
 namespace app\models\cart;
 
 use app\core\db\DBModel;
-use app\models\products\Drink;
 
 class CartItemDrink extends DBModel
 {

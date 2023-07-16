@@ -2,23 +2,11 @@
 
 namespace app\models\cart;
 
-use app\core\db\DBModel;
+use app\models\_View;
 
-abstract class _CartItem extends DBModel
+abstract class _CartItem extends _View
 {
 	public int $item_id = 0;
-
-	public function attributes(): array
-	{
-		return ['item_id', 'id'];
-	}
-
-	protected function rules(): array
-	{
-		return [];
-	}
-
-	abstract protected function className(): string;
 
 	public function get()
 	{

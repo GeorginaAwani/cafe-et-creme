@@ -27,7 +27,7 @@ class AuthController extends Controller
 	public function handleLogin()
 	{
 		// use is logging in
-		if ($this->request()->isPost() && $this->request()->isAjaxRequest()) {
+		if ($this->request()->isPost() && $this->request()->isAPIRequest()) {
 			try {
 				$User = new User;
 				$Login = new Login;
@@ -50,7 +50,7 @@ class AuthController extends Controller
 	public function handleSignup()
 	{
 		// user is submitting the form
-		if ($this->request()->isPost() && $this->request()->isAjaxRequest()) {
+		if ($this->request()->isPost() && $this->request()->isAPIRequest()) {
 			try {
 				// create an instance of the user class
 				$User = new User;

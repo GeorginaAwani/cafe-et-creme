@@ -26,7 +26,7 @@ class Request
 	/**
 	 * Check if request ian ajax request
 	 */
-	public function isAjaxRequest()
+	public function isAPIRequest()
 	{
 		return !empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest';
 	}

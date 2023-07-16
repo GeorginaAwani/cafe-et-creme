@@ -61,7 +61,10 @@ class Router
 	 */
 	private function save_route(string $method, string $path, array $callback)
 	{
-		$this->routes[$method][$path] = $callback;
+		$pattern = preg_replace('/\{(\w+)\}/', '(?<$1>[^\/]+)', $path);
+		$pattern = '#^' . $pattern . '$#';
+
+		$this->routes[$method][$pattern] = $callback;
 	}
 
 	/**
@@ -72,9 +75,8 @@ class Router
 	 */
 	private function match(string $pattern, string $uri)
 	{
-		$pattern = str_replace('/', '\/', $pattern);
-		$pattern = '/^' . $pattern . '$/';
-
+		// $pattern = str_replace('/', '\/', $pattern);
+		// $pattern = '/^' . $pattern . '$/';
 		return preg_match($pattern, $uri);
 	}
 
@@ -86,18 +88,16 @@ class Router
 	 */
 	private function extract(string $pattern, string $uri)
 	{
-		// get all placeholder value from pattern
-		preg_match_all('/{(.+?)}/', $pattern, $matches);
-		$placeholders = $matches[1];
-
-		if (!count($placeholders))
+		$params = [];
+		preg_match($pattern, $uri, $matches);
+		if (!count($matches))
 			return [];
 
-		// get corresponding matching values from the path
-		preg_match_all($pattern, $uri, $values);
-		$parameters = array_slice($values, 1);
+		foreach ($matches as $key => $value) {
+			if (is_string($key)) $params[$key] = $value;
+		}
 
-		return array_combine($placeholders, $parameters);
+		return $params;
 	}
 
 	/**
@@ -133,7 +133,7 @@ class Router
 
 			$callback[0] = $controller;
 
-			return call_user_func($callback, $parameters);
+			return call_user_func($callback, ...$parameters);
 		}
 
 		// callback was not found. Throw error
