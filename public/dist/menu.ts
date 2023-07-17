@@ -17,9 +17,11 @@ $(function () {
     quantity_in_cart?: number;
   }
 
-  function addToCart() {}
+  function addToCart(drink: Drink) {
+    // add to cart if quantity in cart
+  }
 
-  function removeFromCart() {}
+  function removeFromCart(drink: Drink) {}
 
   const menuitem = (drink: Drink): string => {
     let inCart = Object.hasOwn(drink, "quantity_in_cart");
@@ -43,13 +45,19 @@ $(function () {
 			<div class="ms-3 div flex-nowrap">
 				<div class="nav d-flex nav-justified align-items-center">
 					<div class="nav-item"><button class="nav-item btn btn-danger menuitem-btn rounded-circle" data-menu-quantity="subtract" aria-label="Reduce quantity" ${
-            drink.quantity_in_store === 0 ? "disabled" : ""
-          }><i class="fa-regular fa-minus"></i></button></div>
+            inCart ? "disabled" : ""
+          } onclick=${removeFromCart(
+      drink
+    )}><i class="fa-regular fa-minus"></i></button></div>
 					<div class="nav-item">
 						<div class="mb-0 h4 fw-lighter px-3">${drink.quantity_in_cart || 0}</div>
 					</div>
 					<div class="nav-item">
-						<button class="btn btn-danger menuitem-btn rounded-circle" data-menu-quantity="add" onclick={} aria-label="Increase quantity"><i class="fa-regular fa-plus"></i></button>
+						<button class="btn btn-danger menuitem-btn rounded-circle" ${
+              drink.quantity_in_store === 0 ? "disabled" : ""
+            } onclick=${addToCart(
+      drink
+    )} aria-label="Increase quantity"><i class="fa-regular fa-plus"></i></button>
 					</div>
 				</div>
 			</div>

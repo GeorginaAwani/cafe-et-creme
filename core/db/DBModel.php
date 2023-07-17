@@ -115,6 +115,7 @@ abstract class DBModel extends Model
 
 			$sql .= $otherSQL;
 		}
+
 		return $this->db()->prepare($sql, $params);
 	}
 

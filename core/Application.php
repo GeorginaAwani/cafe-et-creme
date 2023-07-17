@@ -45,7 +45,9 @@ class Application
 			// get user from session
 			$id = $this->Session->get('user');
 			if ($id) {
-				$this->user = $user->fetchOne("id = :id", [':id' => $id]);
+				$uid = $user->fetchOne("id = :id", [':id' => $id]);
+				if ($uid)
+					$this->user = $uid;
 			}
 		}
 	}

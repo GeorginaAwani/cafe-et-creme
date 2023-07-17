@@ -2,10 +2,12 @@
 
 namespace app\models;
 
+use PDO;
 use app\core\Model;
-use app\models\products\Container;
+use app\core\Application;
 use app\models\products\Drink;
 use app\models\products\Topping;
+use app\models\products\Container;
 
 class Menu extends Model
 {
@@ -26,20 +28,17 @@ class Menu extends Model
 	 */
 	public function getDrinks(?string $category = null)
 	{
-		$drink = new Drink;
-
-		$where = '';
-		$params = [];
+		// get cart id
+		$Cart = new Cart;
+		$cartId = $Cart->save();
 
 		if ($category) {
-			// get category id
-			$Category = new Category;
-			$id = $Category->fetchOne("name = :name", [':name' => $category], ['id'])->id;
-			$where = " AND category = :cid";
-			$params = [':cid' => $id];
+			$query = Application::$App->DB->query("CALL GetDrinks($cartId, '$category')");
+		} else {
+			$query = Application::$App->DB->query("CALL GetDrinks($cartId)");
 		}
 
-		return ['drinks' => $drink->fetch($where, $params)];
+		return ['drinks' => $query->fetchAll(PDO::FETCH_CLASS), Drink::class];
 	}
 
 	/**

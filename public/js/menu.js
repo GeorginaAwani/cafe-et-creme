@@ -3,8 +3,10 @@ $(function () {
     $(`#menuNav .nav-link[href="${location.pathname}"]`)
         .addClass("active")
         .attr("aria-current", "page");
-    function addToCart() { }
-    function removeFromCart() { }
+    function addToCart(drink) {
+        // add to cart if quantity in cart
+    }
+    function removeFromCart(drink) { }
     const menuitem = (drink) => {
         let inCart = Object.hasOwn(drink, "quantity_in_cart");
         return `<article class="menuitem bg-body-tertiary h-100 rounded-xl p-5 bg-opacity-25" aria-labelledby="menuItem_${drink.id}_Label">
@@ -19,12 +21,12 @@ $(function () {
 			<div class="h2 mb-0">N${drink.price.toLocaleString()}</div>
 			<div class="ms-3 div flex-nowrap">
 				<div class="nav d-flex nav-justified align-items-center">
-					<div class="nav-item"><button class="nav-item btn btn-danger menuitem-btn rounded-circle" data-menu-quantity="subtract" aria-label="Reduce quantity" ${drink.quantity_in_store === 0 ? "disabled" : ""}><i class="fa-regular fa-minus"></i></button></div>
+					<div class="nav-item"><button class="nav-item btn btn-danger menuitem-btn rounded-circle" data-menu-quantity="subtract" aria-label="Reduce quantity" ${inCart ? "disabled" : ""} onclick=${removeFromCart(drink)}><i class="fa-regular fa-minus"></i></button></div>
 					<div class="nav-item">
 						<div class="mb-0 h4 fw-lighter px-3">${drink.quantity_in_cart || 0}</div>
 					</div>
 					<div class="nav-item">
-						<button class="btn btn-danger menuitem-btn rounded-circle" data-menu-quantity="add" onclick={} aria-label="Increase quantity"><i class="fa-regular fa-plus"></i></button>
+						<button class="btn btn-danger menuitem-btn rounded-circle" ${drink.quantity_in_store === 0 ? "disabled" : ""} onclick=${addToCart(drink)} aria-label="Increase quantity"><i class="fa-regular fa-plus"></i></button>
 					</div>
 				</div>
 			</div>
