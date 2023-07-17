@@ -2,6 +2,7 @@
 
 namespace app\core;
 
+use app\core\db\DBModel;
 use app\core\Migration;
 use app\core\SeederDataArray;
 
@@ -11,9 +12,11 @@ abstract class Seeder extends Migration
 
 	abstract protected function table(): string;
 
+	abstract protected function model(): string;
+
 	protected function data()
 	{
-		return new SeederDataArray;
+		return new SeederDataArray(new ($this->model()));
 	}
 
 	protected function add()
@@ -38,6 +41,6 @@ abstract class Seeder extends Migration
 
 	public function down()
 	{
-		$this->db->drop($this->table());
+		$this->db->truncate($this->table());
 	}
 }

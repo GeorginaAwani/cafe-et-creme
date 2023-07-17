@@ -23,6 +23,7 @@ $(function () {
         data
       )) as ModifiedXHRResponse;
 
+      // @ts-ignore
       location.assign(res.redirect);
     } catch (error) {
       let e = error as ModifiedXHRResponse;

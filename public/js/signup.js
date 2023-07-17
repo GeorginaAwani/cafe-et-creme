@@ -12,6 +12,7 @@ $(function () {
         try {
             const res = (await _post("signup", data));
             // show success message
+            // @ts-ignore
             location.assign(res.redirect);
         }
         catch (error) {

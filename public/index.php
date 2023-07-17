@@ -25,7 +25,6 @@ $App->Router->get('/menu/toppings/{id}', [MenuController::class, 'renderMenu']);
 $App->Router->get('/menu/containers/{id}', [MenuController::class, 'renderMenu']);
 $App->Router->get('/menu/containers', [MenuController::class, 'renderMenu']);
 $App->Router->get('/menu/drinks/{id}', [MenuController::class, 'renderMenu']);
-$App->Router->get('/menu/drinks', [MenuController::class, 'renderMenu']);
 $App->Router->get('/menu/{category}', [MenuController::class, 'renderMenu']);
 
 $App->Router->get('/api/menu/toppings', [MenuController::class, 'toppings']);
@@ -35,8 +34,8 @@ $App->Router->get('/api/menu/containers', [MenuController::class, 'containers'])
 $App->Router->get('/api/menu/containers/{id}', [MenuController::class, 'containers']);
 
 $App->Router->get('/api/menu/drinks/{id}', [MenuController::class, 'drink']);
-
-$App->Router->get('/api/menu/{category}', [MenuController::class, 'handleMenu']);
+$App->Router->get('/api/menu', [MenuController::class, 'drinks']);
+$App->Router->get('/api/menu/{category}', [MenuController::class, 'drinks']);
 
 
 $App->Router->get('/login', [AuthController::class, 'renderLogin']);

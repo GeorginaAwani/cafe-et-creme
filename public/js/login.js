@@ -11,6 +11,7 @@ $(function () {
         const data = _form(form);
         try {
             const res = (await _post("login", data));
+            // @ts-ignore
             location.assign(res.redirect);
         }
         catch (error) {

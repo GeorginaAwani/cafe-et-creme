@@ -11,6 +11,7 @@ class Drink extends DBModel
 	public float $price = 0.0;
 	public int $category = 0;
 	public bool $is_alcoholic = false;
+	public int $quantity_in_store = 0;
 	public array|string $image = [];
 
 	public static function tableName(): string

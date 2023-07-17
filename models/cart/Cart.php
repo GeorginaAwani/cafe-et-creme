@@ -1,6 +1,6 @@
 <?php
 
-namespace app\models;
+namespace app\models\cart;
 
 use app\core\Application;
 use app\core\db\DBModel;
@@ -16,12 +16,11 @@ class Cart extends DBModel
 	protected const STATUS_CHECKED_OUT = 2;
 	public const T_CART_ITEMS = 'cart_items';
 
-	protected int $user_id;
+	protected ?int $user_id;
 	protected int $status;
 
 	public function __construct()
 	{
-		$this->user_id = Application::$App->user->id;
 		$this->status = self::STATUS_ACTIVE;
 	}
 
@@ -42,10 +41,12 @@ class Cart extends DBModel
 
 	/**
 	 * Get cart from database
-	 * @return object
+	 * @return object|null
 	 */
-	private function fetch_cart_from_db(): object
+	private function fetch_cart_from_db(): object|null
 	{
+		if (!$this->user_id)
+			return null;
 		return $this->fetchOne("`user_id` = :user_id AND status = :status", [
 			':user_id' => $this->user_id,
 			':status' => $this->status
@@ -58,11 +59,14 @@ class Cart extends DBModel
 	 */
 	public function save()
 	{
+		// cannot fetch or create cart if user is not logged in
+		if (!Application::$App->user)
+			return null;
+
 		// check if a cart exists and
 		$cart = $this->fetch_cart_from_db();
 
-		if ($cart)
-			return $cart->id;
+		if ($cart) return $cart->id;
 
 		$this->user_id = Application::$App->user->id;
 		$this->status = self::STATUS_ACTIVE;

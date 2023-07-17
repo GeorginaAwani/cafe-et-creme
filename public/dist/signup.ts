@@ -24,6 +24,7 @@ $(function () {
       )) as ModifiedXHRResponse;
 
       // show success message
+      // @ts-ignore
       location.assign(res.redirect);
     } catch (error) {
       let e = error as ModifiedXHRResponse;

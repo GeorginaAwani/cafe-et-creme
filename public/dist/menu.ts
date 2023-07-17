@@ -26,20 +26,22 @@ $(function () {
   const menuitem = (drink: Drink): string => {
     let inCart = Object.hasOwn(drink, "quantity_in_cart");
 
-    return `<article class="menuitem bg-body-tertiary h-100 rounded-xl p-5 bg-opacity-25" aria-labelledby="menuItem_${
+    return `<article class="menuitem bg-body-tertiary h-100 rounded-xl p-5 bg-opacity-25 d-flex flex-column justify-content-between" aria-labelledby="menuItem_${
       drink.id
     }_Label">
-		<div class="menuitem-header text-center mb-3 pt-5">
-			<div class="position-relative pt-5">
-				<img src="${
+		<div>
+      <div class="menuitem-header text-center mb-3 pt-5">
+      <div class="position-relative pt-5">
+        <img src="${
           drink.image
         }" alt="" class="bottom-0 mx-auto position-absolute translate-middle-x">
-			</div>
-			<h1 class="h4 text-white mt-3 font-script" id="menuItem_1_Label">${
+      </div>
+      <h1 class="h4 text-white mt-3 font-script" id="menuItem_1_Label">${
         drink.name
       }</h1>
-		</div>
-		<p class="menuitem-body fw-lighter mb-4 lead">${drink.description}</p>
+    </div>
+    <p class="menuitem-body fw-lighter mb-4 lead">${drink.description}</p>
+    </div>
 		<div class="menuitem-footer d-flex align-items-center justify-content-between flex-wrap">
 			<div class="h2 mb-0">N${drink.price.toLocaleString()}</div>
 			<div class="ms-3 div flex-nowrap">
@@ -70,45 +72,9 @@ $(function () {
     const menulist = $("#menulist");
 
     try {
-      const res = await _get("menu/drinks");
-
-      // const drinks : Drink[] = res.drinks;
-
-      const drinks: Drink[] = [
-        {
-          id: 1,
-          name: "café noir à la crème",
-          description:
-            "Bold black coffee meets creamy indulgence. Elevate your coffee experience.",
-          price: 6000,
-          category: "coffee",
-          is_alcoholic: false,
-          image: "/images/coffee.png",
-          quantity_in_store: 200,
-        },
-        {
-          id: 2,
-          name: "Mojito Cocktail",
-          description:
-            "Bold black coffee meets creamy indulgence. Elevate your coffee experience.",
-          price: 8000,
-          category: "cocktail",
-          is_alcoholic: true,
-          image: "/images/cocktail.png",
-          quantity_in_store: 200,
-        },
-        {
-          id: 3,
-          name: "Jus d'orange pressée",
-          description:
-            "Bold black coffee meets creamy indulgence. Elevate your coffee experience.",
-          price: 1500,
-          category: "juice",
-          is_alcoholic: false,
-          image: "/images/orange-juice.png",
-          quantity_in_store: 200,
-        },
-      ];
+      const res = await _get("menu");
+      // @ts-ignore
+      const drinks: Drink[] = res.drinks;
 
       drinks.forEach((drink) => {
         let item = '<div class="col-lg-4 mb-lg-3 mb-5">';
@@ -117,7 +83,9 @@ $(function () {
 
         menulist.append(item);
       });
-    } catch (error) {}
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   getMenuItems();

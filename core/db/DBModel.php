@@ -17,6 +17,7 @@ abstract class DBModel extends Model
 	 * @var int
 	 */
 	public int $id = 0;
+
 	abstract static public function tableName(): string;
 
 	/**

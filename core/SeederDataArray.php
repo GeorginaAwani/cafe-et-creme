@@ -2,50 +2,34 @@
 
 namespace app\core;
 
+use app\core\db\DBModel;
+
 class SeederDataArray
 {
+	private DBModel $model;
 	public string $name;
 	public string $description;
 	public ?string $image = null;
 	public ?float $price = null;
 
-	public function name(string $name)
+	public function __construct(DBModel $model)
 	{
-		$this->name = $name;
-		return $this;
+		$this->model = $model;
 	}
 
-	public function description(string $description)
+	public function set(string $property, string|int|float $value)
 	{
-		$this->description = $description;
-		return $this;
-	}
-
-	public function image(string $image)
-	{
-		$this->image = $image;
-		return $this;
-	}
-
-	public function price(float $price)
-	{
-		$this->price = $price;
+		$this->model->$property = $value;
 		return $this;
 	}
 
 	public function map()
 	{
-		$map = [
-			'name' => $this->name,
-			'description' => $this->description,
-		];
+		$attributes = $this->model->attributes();
+		$values = array_map(function ($attribute) {
+			return $this->model->$attribute;
+		}, $attributes);
 
-		if (!is_null($this->image))
-			$map['image'] = $this->image;
-
-		if (!is_null($this->price))
-			$map['price'] = $this->price;
-
-		return $map;
+		return array_combine($attributes, $values);
 	}
 }

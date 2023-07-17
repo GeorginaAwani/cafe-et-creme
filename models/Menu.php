@@ -5,13 +5,15 @@ namespace app\models;
 use PDO;
 use app\core\Model;
 use app\core\Application;
-use app\models\products\Drink;
+use app\models\cart\Cart;
+use app\models\products\_Drink;
 use app\models\products\Topping;
 use app\models\products\Container;
 
 class Menu extends Model
 {
 	public string $search = '';
+	public int $page = 1;
 
 	protected function rules(): array
 	{
@@ -32,23 +34,32 @@ class Menu extends Model
 		$Cart = new Cart;
 		$cartId = $Cart->save();
 
-		if ($category) {
-			$query = Application::$App->DB->query("CALL GetDrinks($cartId, '$category')");
-		} else {
-			$query = Application::$App->DB->query("CALL GetDrinks($cartId)");
-		}
+		$cartId = $cartId ?? 'NULL';
+		$category = $category ? "'$category'" : 'NULL';
+		$offset = ($this->page * 15) - 15;
 
-		return ['drinks' => $query->fetchAll(PDO::FETCH_CLASS), Drink::class];
+		$sql = "CALL GetDrinksAgainstCart($cartId, $category, $offset)";
+		$query = Application::$App->DB->query($sql);
+
+		return [
+			'drinks' => $query->fetchAll(PDO::FETCH_CLASS, _Drink::class),
+			'nextPage' => ($this->page + 1)
+		];
 	}
 
 	/**
 	 * Get a drink
 	 */
-	public function getDrink(int $drink)
+	public function GetDrink(int $drink)
 	{
-		$Drink = new _Drink;
-		$Drink->id = $drink;
-		return ['drink' => $Drink->get()];
+		$Cart = new Cart;
+		$cartId = $Cart->save();
+
+		$cartId = $cartId ?? null;
+
+		$query = Application::$App->DB->query("CALL GetDrinkAgainstCart($cartId, $drink)");
+
+		return ['drink' => $query->fetchObject(_Drink::class)];
 	}
 
 	/**
