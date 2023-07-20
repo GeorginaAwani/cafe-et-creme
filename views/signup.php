@@ -25,7 +25,7 @@ use app\views\form\Form;
 		</div>
 	</div>
 </aside>
-<main class="col-lg-5 px-0 h-100 bg-secondary bg-secondary-img z-1 position-relative bg-img text-primary overflow-auto" id="main">
+<main class="col-lg-5 px-0 h-100 bg-secondary bg-light-img z-1 position-relative bg-img text-primary overflow-auto" id="main">
 	<div class="px-3">
 		<div class="p-5 pb-3 h-100">
 			<div class="mb-4">

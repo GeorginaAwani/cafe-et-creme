@@ -19,18 +19,18 @@ class Container extends DBModel
 	{
 		return ['name', 'description', 'price', 'image'];
 	}
-	protected function rules(): array
+
+	public function save()
 	{
-		return [
+		$rules = [
 			'name' => [self::RULE_REQUIRED],
 			'description' => [self::RULE_REQUIRED],
 			'image' => [self::RULE_REQUIRED, self::RULE_IMAGE],
 			'price' => [self::RULE_REQUIRED, self::RULE_PRICE]
 		];
-	}
 
-	public function save()
-	{
+		$this->validate($rules);
+
 		$this->image = $this->saveFile($this->image);
 		return parent::save();
 	}

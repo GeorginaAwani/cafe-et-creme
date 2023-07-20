@@ -24,9 +24,9 @@ class Drink extends DBModel
 		return ['name', 'description', 'price', 'category', 'is_alcoholic', 'image',];
 	}
 
-	protected function rules(): array
+	public function save()
 	{
-		return [
+		$rules = [
 			'name' => [self::RULE_REQUIRED],
 			'description' => [self::RULE_REQUIRED],
 			'price' => [self::RULE_REQUIRED, self::RULE_PRICE],
@@ -37,10 +37,9 @@ class Drink extends DBModel
 			'is_alcoholic' => [self::RULE_REQUIRED],
 			'image' => [self::RULE_REQUIRED, self::RULE_IMAGE],
 		];
-	}
 
-	public function save()
-	{
+		$this->validate($rules);
+
 		$this->image = $this->saveFile($this->image);
 		return parent::save();
 	}

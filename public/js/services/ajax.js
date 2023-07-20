@@ -6,11 +6,11 @@ var Methods;
     Methods["DELETE"] = "delete";
     Methods["PUT"] = "put";
 })(Methods || (Methods = {}));
+export const API = "http://localhost:8080/api/";
 class Ajax {
-    api = "http://localhost:8080/api/";
     async call(url, method, data) {
         const setup = {
-            url: `${this.api}${url}`,
+            url: `${API}${url}`,
             type: method,
             dataType: "json",
             data: data,

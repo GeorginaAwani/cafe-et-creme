@@ -9,14 +9,17 @@ class m_1689506643_create_get_drinks_procedure extends Migration
 {
 	public function up()
 	{
-		$this->db->exec("CREATE PROCEDURE GetDrinksAgainstCart(IN cartId INT, IN drinkCategory VARCHAR(50), INT offsetValue INT)
+		$this->db->exec("CREATE PROCEDURE GetDrinksAgainstCart(IN cartId INT, IN drinkCategory VARCHAR(50), IN search VARCHAR(255), IN offsetValue INT)
 		BEGIN
 		SET @query = '
 				SELECT d.id, d.name, d.SELECT d.id, d.name, d.description, d.category, d.quantity_in_store, d.is_alcoholic, d.image, d.price, IF(cid.item_id IS NULL, 0,  ci.quantity) AS quantity_in_cart
 				FROM (vw_drinks AS d
 				LEFT JOIN cart_items AS ci ON d.id = ci.drink_id AND (? IS NULL OR ci.cart_id = ?))
 				LEFT JOIN cart_item_drinks AS cid ON ci.id = cid.item_id
-				WHERE (? IS NULL OR d.category = ?)
+				WHERE (? IS NULL OR d.category = ?) AND 
+				(? IS NULL OR 
+					(d.name LIKE CONCAT(\"%\", ? \"%\") OR d.description LIKE CONCAT(\"%\", ? \"%\"))
+					)
 				GROUP BY d.id
 				LIMIT 15 OFFSET ?
 			';

@@ -13,7 +13,8 @@ class m_1688654842_create_categories_table extends Migration
 		$this->db->create('categories', [
 			$this->db->field()->name('id')->type(DatabaseField::INT)->primaryKey(),
 			$this->db->field()->name('name')->type(DatabaseField::VARCHAR)->size(50),
-			$this->db->field()->name('description')->type(DatabaseField::TEXT)
+			$this->db->field()->name('description')->type(DatabaseField::TEXT),
+			$this->db->field()->name('image')->type(DatabaseField::VARCHAR)->size(512),
 		]);
 	}
 

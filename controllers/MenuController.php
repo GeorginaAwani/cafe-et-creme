@@ -12,15 +12,13 @@ class MenuController extends Controller
 		$this->layout = 'app';
 	}
 
-	public function drink(int $drink)
+	public function categories()
 	{
 		if ($this->request()->isGet() && $this->request()->isAPIRequest()) {
 			try {
 				$Menu = new Menu;
-				$Menu->loadData();
 
-				// get drinks by category
-				$data = $Menu->GetDrink($drink);
+				$data = $Menu->categories();
 
 				$this->response()->sendSuccess($data);
 			} catch (\Throwable $e) {
@@ -29,25 +27,31 @@ class MenuController extends Controller
 		}
 	}
 
-	public function drinks(string $category = null)
+	public function drink(int $drink)
 	{
 		if ($this->request()->isGet() && $this->request()->isAPIRequest()) {
 			try {
 				$Menu = new Menu;
 				$Menu->loadData();
 
-				$query = $this->request()->query();
-
-				if (isset($query['search'])) {
-					// search instead
-					$Menu->search = $query['search'];
-					$data = [];
-				} else {
-					// get drinks by category
-					$data = $Menu->getDrinks($category);
-				}
+				// get drinks by category
+				$data = $Menu->drink($drink);
 
 				$this->response()->sendSuccess($data);
+			} catch (\Throwable $e) {
+				$this->response()->sendError($e);
+			}
+		}
+	}
+
+	public function drinks()
+	{
+		if ($this->request()->isGet() && $this->request()->isAPIRequest()) {
+			try {
+				$Menu = new Menu;
+				$Menu->loadData();
+
+				$this->response()->sendSuccess($Menu->drinks());
 			} catch (\Throwable $e) {
 				$this->response()->sendError($e);
 			}
@@ -61,7 +65,6 @@ class MenuController extends Controller
 			try {
 				$Menu = new Menu;
 
-				// get drinks by category
 				$data = $Menu->toppings($topping);
 
 				$this->response()->sendSuccess($data);
@@ -87,7 +90,7 @@ class MenuController extends Controller
 		}
 	}
 
-	public function renderMenu()
+	public function menu()
 	{
 		echo $this->render('menu');
 	}

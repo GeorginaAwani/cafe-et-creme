@@ -1,12 +1,12 @@
 <?php
 
 use app\core\Seeder;
-use app\models\Category;
+use app\models\products\Category;
 
 /**
  * Insert records into categories table
  */
-class m_1689342747_populate_categories_table extends Seeder
+class m_1689342747_seed_categories_table extends Seeder
 {
 	protected function table(): string
 	{
@@ -35,7 +35,7 @@ class m_1689342747_populate_categories_table extends Seeder
 			['name' => 'cocktail', 'description' =>  "Immerse yourself in a world of mixology with our tantalizing cocktails, expertly crafted to dazzle your taste buds and transport you to new dimensions of flavor."],
 			['name' => 'mocktail', 'description' =>  "Experience the enchantment of alcohol-free mixology with our delightful mocktails, combining exquisite flavors and artful presentation for a captivating experience."],
 			['name' => 'chocolate', 'description' =>  "Succumb to the allure of chocolate with our decadent creations, showcasing the finest cacao and indulging your sweetest desires."],
-			['name' => 'ice-cream', 'description' =>  "Delight in a paradise of frozen delight with our luscious ice cream creations, offering a tantalizing array of flavors to cool you down and satisfy your cravings."],
+			['name' => 'ice cream', 'description' =>  "Delight in a paradise of frozen delight with our luscious ice cream creations, offering a tantalizing array of flavors to cool you down and satisfy your cravings."],
 			['name' => 'yoghurt', 'description' =>  "Delight in the creamy goodness of our yogurt-based drinks, offering a refreshing and wholesome option for a satisfying treat."],
 		];
 	}
@@ -47,6 +47,7 @@ class m_1689342747_populate_categories_table extends Seeder
 			foreach ($category as $property => $value) {
 				$categoryData->set($property, $value);
 			}
+			$categoryData->set('image', '');
 			$this->add($categoryData);
 		}
 

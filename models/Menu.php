@@ -8,37 +8,42 @@ use app\core\Application;
 use app\models\cart\Cart;
 use app\models\products\_Drink;
 use app\models\products\Topping;
+use app\models\products\Category;
 use app\models\products\Container;
 
 class Menu extends Model
 {
-	public string $search = '';
+	public ?string $search = null;
+	public ?string $category = null;
 	public int $page = 1;
 
-	protected function rules(): array
+	/**
+	 * Get categories
+	 */
+	public function categories(): array
 	{
-		return [];
-	}
+		$Category = new Category;
 
-	public function search()
-	{
-		// search here
+		return ['containers' => $Category->fetch()];
 	}
 
 	/**
 	 * Display drink menu
 	 */
-	public function getDrinks(?string $category = null)
-	{
-		// get cart id
+	public function drinks()
+	{		// get cart id
 		$Cart = new Cart;
 		$cartId = $Cart->save();
 
+		if (!is_null($this->category))
+			$this->category = str_replace('-', ' ', $this->category);
+
 		$cartId = $cartId ?? 'NULL';
-		$category = $category ? "'$category'" : 'NULL';
+		$category = $this->category ? "'{$this->category}'" : 'NULL';
+		$search = $this->search ? "'{$this->search}'" : 'NULL';
 		$offset = ($this->page * 15) - 15;
 
-		$sql = "CALL GetDrinksAgainstCart($cartId, $category, $offset)";
+		$sql = "CALL GetDrinksAgainstCart($cartId, $category, $search, $offset)";
 		$query = Application::$App->DB->query($sql);
 
 		return [
@@ -50,7 +55,7 @@ class Menu extends Model
 	/**
 	 * Get a drink
 	 */
-	public function GetDrink(int $drink)
+	public function drink(int $drink)
 	{
 		$Cart = new Cart;
 		$cartId = $Cart->save();
@@ -63,7 +68,7 @@ class Menu extends Model
 	}
 
 	/**
-	 * Display topping menu
+	 * Get toppings
 	 * @return array<array>
 	 */
 	public function toppings(?int $topping = null)
@@ -80,7 +85,7 @@ class Menu extends Model
 	}
 
 	/**
-	 * Display container menu
+	 * Get containers
 	 * @return array<array>
 	 */
 	public function containers(?int $container = null)

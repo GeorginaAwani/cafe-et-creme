@@ -6,7 +6,7 @@ use app\models\products\Topping;
 /**
  * Migrations are database changes. The order migrations are executed is every important. We start with a letter because the class must start with a letter
  */
-class m_1689343385_populate_toppings_table extends Seeder
+class m_1689343385_seed_toppings_table extends Seeder
 {
 	protected function table(): string
 	{

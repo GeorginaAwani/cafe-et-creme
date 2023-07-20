@@ -1,6 +1,9 @@
-import { _get } from "./services/ajax.js";
+import { API, _get, _post } from "./services/ajax.js";
 
 $(function () {
+  const loadMore = $("#loadMore");
+  const loader = $("#loader");
+  const loadMoreBtn = $("#loadMore>.btn");
   $(`#menuNav .nav-link[href="${location.pathname}"]`)
     .addClass("active")
     .attr("aria-current", "page");
@@ -16,12 +19,6 @@ $(function () {
     quantity_in_store: number;
     quantity_in_cart?: number;
   }
-
-  function addToCart(drink: Drink) {
-    // add to cart if quantity in cart
-  }
-
-  function removeFromCart(drink: Drink) {}
 
   const menuitem = (drink: Drink): string => {
     let inCart = Object.hasOwn(drink, "quantity_in_cart");
@@ -48,18 +45,14 @@ $(function () {
 				<div class="nav d-flex nav-justified align-items-center">
 					<div class="nav-item"><button class="nav-item btn btn-danger menuitem-btn rounded-circle" data-menu-quantity="subtract" aria-label="Reduce quantity" ${
             inCart ? "disabled" : ""
-          } onclick=${removeFromCart(
-      drink
-    )}><i class="fa-regular fa-minus"></i></button></div>
+          }><i class="fa-regular fa-minus"></i></button></div>
 					<div class="nav-item">
 						<div class="mb-0 h4 fw-lighter px-3">${drink.quantity_in_cart || 0}</div>
 					</div>
 					<div class="nav-item">
 						<button class="btn btn-danger menuitem-btn rounded-circle" ${
               drink.quantity_in_store === 0 ? "disabled" : ""
-            } onclick=${addToCart(
-      drink
-    )} aria-label="Increase quantity"><i class="fa-regular fa-plus"></i></button>
+            } aria-label="Increase quantity"><i class="fa-regular fa-plus"></i></button>
 					</div>
 				</div>
 			</div>
@@ -68,8 +61,21 @@ $(function () {
 	`;
   };
 
+  function hide(e: JQuery<HTMLElement>) {
+    e.fadeOut(50);
+  }
+
+  function show(e: JQuery<HTMLElement>) {
+    e.fadeIn(50);
+  }
+
+  /**
+   * Get menu items
+   */
   async function getMenuItems() {
     const menulist = $("#menulist");
+    hide(loadMore);
+    show(loader);
 
     try {
       const res = await _get("menu");
@@ -77,14 +83,20 @@ $(function () {
       const drinks: Drink[] = res.drinks;
 
       drinks.forEach((drink) => {
-        let item = '<div class="col-lg-4 mb-lg-3 mb-5">';
+        let item = '<div class="col-lg-4 mb-5">';
         item += menuitem(drink);
         item += "</div>";
 
         menulist.append(item);
       });
+
+      // @ts-ignore
+      loadMoreBtn.attr("href", `${API}menu?page=${res.nextPage}`);
+      show(loadMore);
     } catch (error) {
       console.error(error);
+    } finally {
+      hide(loader);
     }
   }
 

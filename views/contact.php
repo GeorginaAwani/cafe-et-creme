@@ -13,7 +13,7 @@ use app\views\form\Form;
 </style>
 <div class="row h-100">
 	<div class="col-lg-6 px-0">
-		<section class="h-100 bg-primary position-relative text-secondary z-1 bg-primary-img bg-img">
+		<section class="h-100 bg-primary position-relative text-light z-1 bg-primary-img bg-img">
 			<div class="pb-3 d-flex flex-column justify-content-between h-100">
 				<div class="p-5 pt-4 pb-0">
 					<h1 class="display-3 fw-bolder">React Out To Us</h1>
@@ -66,7 +66,7 @@ use app\views\form\Form;
 		</section>
 	</div>
 	<div class="col-lg-6 px-0">
-		<div id="formWrap" class="h-100 bg-secondary bg-secondary-img z-1 position-relative bg-img text-primary">
+		<div id="formWrap" class="h-100 bg-light bg-light-img z-1 position-relative bg-img text-primary">
 			<div class="h-100 px-3">
 				<div class="p-5 pb-3 h-100">
 					<div class="mb-5">

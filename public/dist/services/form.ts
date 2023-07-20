@@ -43,7 +43,6 @@ export function displayError(form: HTMLFormElement, xhr: ModifiedXHRResponse) {
     console.log(_error);
   }
 }
-
 export function clearErrors(form: HTMLFormElement) {
   $(form).find(".is-invalid").removeClass("is-invalid");
   $(form).find(".invalid-feedback, .form-error").empty();

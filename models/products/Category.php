@@ -1,6 +1,6 @@
 <?php
 
-namespace app\models;
+namespace app\models\products;
 
 use app\core\db\DBModel;
 
@@ -8,6 +8,7 @@ class Category extends DBModel
 {
 	public string $name = '';
 	public string $description = '';
+	public string $image = '';
 
 	public static function tableName(): string
 	{
@@ -21,7 +22,6 @@ class Category extends DBModel
 
 	public function save()
 	{
-
-		return parent::save();
+		return false;
 	}
 }

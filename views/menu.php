@@ -26,13 +26,19 @@ use app\views\form\Form;
 <section id="menu">
 	<ul class="nav mt-4 h4 mb-5 fw-normal" id="menuNav">
 		<a href="/menu" class="fw-light mx-1 nav-link px-4 py-2 rounded-pill">Popular</a>
-		<a href="/menu/coffees" class="fw-light mx-1 nav-link px-4 py-2 rounded-pill">Coffees</a>
-		<a href="/menu/fruit-drinks" class="fw-light mx-1 nav-link px-4 py-2 rounded-pill">Fruit Drinks</a>
-		<a href="/menu/teas" class="fw-light mx-1 nav-link px-4 py-2 rounded-pill">Teas</a>
-		<a href="/menu/mocktails" class="fw-light mx-1 nav-link px-4 py-2 rounded-pill">Mocktails</a>
-		<a href="/menu/cocktails" class="fw-light mx-1 nav-link px-4 py-2 rounded-pill">Cocktails</a>
+		<a href="/menu/coffee" class="fw-light mx-1 nav-link px-4 py-2 rounded-pill">Coffees</a>
+		<a href="/menu/smoothie" class="fw-light mx-1 nav-link px-4 py-2 rounded-pill">Smoothie</a>
+		<a href="/menu/tea" class="fw-light mx-1 nav-link px-4 py-2 rounded-pill">Teas</a>
+		<a href="/menu/mocktail" class="fw-light mx-1 nav-link px-4 py-2 rounded-pill">Mocktails</a>
+		<a href="/menu/cocktail" class="fw-light mx-1 nav-link px-4 py-2 rounded-pill">Cocktails</a>
 	</ul>
 
 	<section id="menulist" class="pt-5 row">
 	</section>
+	<div id="loader" class="text-center h1" style="display:none">
+		<i class="fa-light text-secondary fa-spin fa-spinner-third"></i>
+	</div>
+	<div id="loadMore" class="text-center" style="display:none">
+		<?= Form::fillButton('Load More', '', 'secondary') ?>
+	</div>
 </section>

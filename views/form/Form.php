@@ -49,12 +49,12 @@ class Form
 
 	public static function fillButton(string $text, string $href, string $class = 'primary')
 	{
-		return sprintf('<a href="%s" class="btn btn-arrow btn-lg fw-lighter btn-%s position-relative px-5 py-3 rounded-pill z-1">%s<i class="fa-light fa-angle-right fa-arrow-icon text-%s position-absolute top-50 translate-middle-y"></i></a>', $href, $class, $text, $class);
+		return sprintf('<a href="%s" class="btn btn-arrow btn-lg fw-lighter btn-%s position-relative px-5 py-3 rounded-pill z-0">%s<i class="fa-light fa-angle-right fa-arrow-icon text-%s position-absolute top-50 translate-middle-y"></i></a>', $href, $class, $text, $class);
 	}
 
 	public function submit(string $text, string $outlineClass = 'primary')
 	{
-		return sprintf('<button type="submit" class="btn btn-arrow btn-lg fw-lighter btn-%s position-relative px-5 py-3 rounded-pill">%s<i class="fa-light fa-angle-right fa-arrow-icon text-%s position-absolute top-50 translate-middle-y"></i></button>', $outlineClass, $text, $outlineClass);
+		return sprintf('<button type="submit" class="btn btn-arrow btn-lg fw-lighter btn-%s position-relative px-5 py-3 rounded-pill z-0">%s<i class="fa-light fa-angle-right fa-arrow-icon text-%s position-absolute top-50 translate-middle-y"></i></button>', $outlineClass, $text, $outlineClass);
 	}
 
 	public function end()

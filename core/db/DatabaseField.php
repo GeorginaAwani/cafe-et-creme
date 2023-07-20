@@ -11,6 +11,7 @@ class DatabaseField
 	const TEXT = 'TEXT';
 	const TIMESTAMP = 'TIMESTAMP';
 	const BOOLEAN = 'BOOLEAN';
+	const ENUM = 'ENUM';
 
 	public string $name;
 	public string $type;
@@ -26,6 +27,8 @@ class DatabaseField
 	 */
 	public ?array $foreignKey = null;
 
+	public ?array $enum = null;
+
 	/**
 	 * Set field name
 	 * @param string $name
@@ -34,6 +37,19 @@ class DatabaseField
 	public function name(string $name)
 	{
 		$this->name = $name;
+		return $this;
+	}
+
+	private function set(string $name, string $type)
+	{
+		$this->name = $name;
+		$this->type = $type;
+		return $this;
+	}
+
+	public function enum(...$values)
+	{
+		$this->enum = $values;
 		return $this;
 	}
 

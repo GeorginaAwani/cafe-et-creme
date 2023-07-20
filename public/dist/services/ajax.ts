@@ -11,16 +11,16 @@ export interface ModifiedXHRResponse extends JQuery.jqXHR<unknown> {
   error?: boolean;
 }
 
-class Ajax {
-  private readonly api: string = "http://localhost:8080/api/";
+export const API: string = "http://localhost:8080/api/";
 
+class Ajax {
   public async call(
     url: string,
     method: Methods,
     data?: {}
   ): Promise<ModifiedXHRResponse> {
     const setup: JQueryAjaxSettings = {
-      url: `${this.api}${url}`,
+      url: `${API}${url}`,
       type: method,
       dataType: "json",
       data: data,

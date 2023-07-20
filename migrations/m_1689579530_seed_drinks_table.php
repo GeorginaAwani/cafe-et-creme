@@ -501,7 +501,6 @@ class m_1689579530_seed_drinks_table extends Seeder
 	{
 		foreach ($this->data_array() as $category => $drinks) {
 			foreach ($drinks as $drink) {
-				var_dump($drink);
 				$drinkData = $this->data();
 				foreach ($drink as $property => $value) {
 					$drinkData->set($property, $value);

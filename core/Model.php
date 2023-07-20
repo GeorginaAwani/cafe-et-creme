@@ -16,6 +16,8 @@ abstract class Model
 	public const RULE_MIN = 8;
 	public const RULE_MAX = 9;
 	public const RULE_MATCH = 10;
+	public const RULE_IN = 11;
+	public const RULE_DATETIME = 12;
 
 	public function loadData()
 	{
@@ -43,6 +45,8 @@ abstract class Model
 			self::RULE_MIN => '{field} must be at least {min} characters',
 			self::RULE_NUMERIC => '{field} must be a valid number',
 			self::RULE_MATCH => 'Passwords must match',
+			self::RULE_IN => 'Invalid {field} value',
+			self::RULE_DATETIME => '{field} is an invalid time'
 		];
 	}
 
@@ -112,6 +116,22 @@ abstract class Model
 						$a = $rule['attribute'];
 						if ($value !== $this->$a)
 							$error = true;
+						break;
+					case self::RULE_IN:
+						if (!in_array($value, $rule[1])) $error = true;
+						break;
+					case self::RULE_DATETIME:
+						try {
+							$time = new \DateTime($value);
+							$now = new \DateTime;
+
+							if (isset($rule['future']) && $time <= $now) {
+								$error = true;
+							}
+						} catch (\Throwable $e) {
+							$error = true;
+						}
+
 						break;
 				}
 

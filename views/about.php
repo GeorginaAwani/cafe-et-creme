@@ -12,7 +12,7 @@ use app\views\form\Form;
 
 <div class="row h-100">
 	<div class="col-lg-7 px-0">
-		<section class="h-100 bg-secondary text-primary z-1">
+		<section class="h-100 bg-light text-primary z-1">
 			<div class="px-3 h-100">
 				<div class="p-5">
 					<h1 class="display-3 fw-bolder mb-5">Get To Know Us</h1>
@@ -28,7 +28,7 @@ use app\views\form\Form;
 		</section>
 	</div>
 	<div class="col-lg-5 px-0">
-		<section class="h-100 bg-primary position-relative bg-primary-img bg-img z-1 text-secondary">
+		<section class="h-100 bg-primary position-relative bg-primary-img bg-img z-1 text-light">
 			<div class="p-5 pb-4 h-100">
 				<div class="pt-5 px-3 d-flex flex-column h-100 justify-content-between">
 					<div class="">

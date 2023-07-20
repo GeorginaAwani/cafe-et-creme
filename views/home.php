@@ -25,7 +25,7 @@ use app\views\form\Form;
 		</section>
 	</div>
 	<div class="col-lg-5 px-0">
-		<section class="h-100 bg-secondary text-primary">
+		<section class="h-100 bg-light text-primary">
 			<div class="h-100">
 				<div class="p-5 pb-3 h-100 flex-column d-flex justify-content-between">
 					<div class="">
@@ -40,21 +40,21 @@ use app\views\form\Form;
 						<div id="productName" class="h3 font-script text-primary mb-2 dynamic-text">Cappuccino</div>
 						<div class="position-relative d-inline-block">
 							<div id="productPriceTag" class="position-absolute top-50 translate-middle-y"></div>
-							<div id="productPrice" class="d-inline-block font-script h5 mb-0 pb-2 pe-3 ps-4 pt-2 text-secondary dynamic-text">N6,000</div>
+							<div id="productPrice" class="d-inline-block font-script h5 mb-0 pb-2 pe-3 ps-4 pt-2 text-light dynamic-text">N6,000</div>
 						</div>
 					</div>
 
 					<ul class="list-inline mb-2 mx-auto" id="carouselControls">
 						<li class="list-inline-item mx-2">
-							<button class="btn btn-danger rounded-circle active" type="button" aria-current="true" aria-label="Page 1"></button>
+							<button class="btn btn-secondary rounded-circle active" type="button" aria-current="true" aria-label="Page 1"></button>
 						</li>
 
 						<li class="list-inline-item mx-2">
-							<button class="btn btn-danger rounded-circle" type="button" aria-label="Page 2"></button>
+							<button class="btn btn-secondary rounded-circle" type="button" aria-label="Page 2"></button>
 						</li>
 
 						<li class="list-inline-item mx-2">
-							<button class="btn btn-danger rounded-circle" type="button" aria-label="Page 3"></button>
+							<button class="btn btn-secondary rounded-circle" type="button" aria-label="Page 3"></button>
 						</li>
 					</ul>
 				</div>
