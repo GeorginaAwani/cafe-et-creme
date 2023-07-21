@@ -9,7 +9,7 @@ body,
 
 /* NAVBAR */
 #iconNav .nav-link {
-	color: var(--bs-secondary) !important;
+	color: var(--bs-light) !important;
 }
 
 #search {

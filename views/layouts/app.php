@@ -12,8 +12,8 @@ use app\views\form\Form;
 	<link rel="stylesheet" href="/css/app.css" />
 </head>
 
-<body class="bg-primary text-secondary">
-	<nav class="navbar navbar-dark navbar-expand-lg bg-primary fixed-top py-3 border-bottom border-secondary" id="navbar">
+<body class="bg-primary text-light">
+	<nav class="navbar navbar-dark navbar-expand-lg bg-primary fixed-top py-3 border-bottom border-light" id="navbar">
 		<div class="container-fluid px-5">
 			<a class="navbar-brand font-script" href="/">Café et Crème</a>
 			<button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
@@ -38,13 +38,13 @@ use app\views\form\Form;
 							</li>
 						</ul>
 
-						<div class="d-lg-flex text-secondary">
+						<div class="d-lg-flex text-light">
 							<?php $Form = Form::begin('searchForm') ?>
 							<div class="position-relative">
 								<i class="fa-light fa-search position-absolute translate-middle-y top-50 ms-4 mb-0 h4"></i>
-								<input type="search" id="search" name="search" class="bg-transparent border-secondary form-control py-3 px-5 rounded-pill fw-lighter" placeholder="Search" required>
+								<input type="search" id="search" name="search" class="bg-transparent border-light form-control py-3 px-5 rounded-pill fw-lighter" placeholder="Search" required>
 								<div class="visually-hidden">
-									<?= $Form->submit('Submit', 'secondary') ?>
+									<?= $Form->submit('Submit', 'light') ?>
 								</div>
 							</div>
 							<?php $Form->end() ?>
@@ -76,7 +76,7 @@ use app\views\form\Form;
 			</div>
 		</main>
 
-		<footer id="footer" class="py-3 bg-primary border-top border-secondary text-secondary">
+		<footer id="footer" class="py-3 bg-primary border-top border-light text-light">
 			<div class="container">
 				<div class="d-flex justify-content-end">
 					<?php include_once __DIR__ . '/../components/full-contact-list.php' ?>

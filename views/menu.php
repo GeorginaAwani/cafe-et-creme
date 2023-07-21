@@ -36,9 +36,9 @@ use app\views\form\Form;
 	<section id="menulist" class="pt-5 row">
 	</section>
 	<div id="loader" class="text-center h1" style="display:none">
-		<i class="fa-light text-secondary fa-spin fa-spinner-third"></i>
+		<i class="fa-light text-light fa-spin fa-spinner-third"></i>
 	</div>
 	<div id="loadMore" class="text-center" style="display:none">
-		<?= Form::fillButton('Load More', '', 'secondary') ?>
+		<?= Form::fillButton('Load More', '', 'light') ?>
 	</div>
 </section>

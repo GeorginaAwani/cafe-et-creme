@@ -2,7 +2,7 @@
 
 namespace app\core;
 
-use app\core\db\DBModel;
+use app\core\DBModel;
 
 class SeederDataArray
 {

@@ -2,7 +2,7 @@
 
 namespace app\models\products;
 
-use app\core\db\DBModel;
+use app\core\DBModel;
 
 class Category extends DBModel
 {
@@ -10,18 +10,48 @@ class Category extends DBModel
 	public string $description = '';
 	public string $image = '';
 
-	public static function tableName(): string
+	public static function table(): string
 	{
 		return 'categories';
 	}
 
-	public function attributes(): array
+	protected function attributes(): array
 	{
-		return ['id', 'name', 'description'];
+		return ['name', 'description'];
 	}
 
-	public function save()
+	private function rules()
 	{
-		return false;
+		return [
+			'name' => [],
+			'description' => []
+		];
+	}
+
+	public function new()
+	{
+		$this->validate($this->makeRequired($this->rules()));
+
+		$this->create();
+	}
+
+	public function get()
+	{
+		return $this->all("name = :name", [
+			':name' => $this->name
+		])[0];
+	}
+
+	public function edit()
+	{
+	}
+
+	public function retrieve()
+	{
+		return $this->all();
+	}
+
+	public function remove()
+	{
 	}
 }

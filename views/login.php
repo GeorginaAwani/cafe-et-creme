@@ -14,18 +14,18 @@ use app\views\form\Form;
 
 <script src="/js/login.js" type="module"></script>
 
-<aside class="col-lg-7 px-0 bg-primary position-relative text-secondary z-1 bg-primary-img bg-img" id="hero">
+<aside class="col-lg-7 px-0 bg-primary position-relative text-light z-1 bg-primary-img bg-img" id="hero">
 	<div class="p-5 pt-0 d-flex flex-column h-100 justify-content-center">
 		<div class="p-lg-5 p-3">
 			<div class="px-lg-5 py-lg-3">
 				<h1 class="display-3 fw-bolder mb-4"><a class="font-script text-reset text-decoration-none" href="/">Café et Crème</a></h1>
-				<hr class="border-secondary ms-auto opacity-100 w-50 mb-5">
+				<hr class="border-light ms-auto opacity-100 w-50 mb-5">
 				<h2 class="fw-lighter">Log in to unlock a world full of flavors and quench your thirst for adventure</h2>
 			</div>
 		</div>
 	</div>
 </aside>
-<main class="col-lg-5 px-0 overflow-auto bg-secondary bg-light-img z-1 position-relative bg-img text-primary" id="main">
+<main class="col-lg-5 px-0 overflow-auto bg-light bg-light-img z-1 position-relative bg-img text-primary" id="main">
 	<div class="h-100 px-3">
 		<div class="p-5 pb-3 h-100">
 			<div class="mb-4">
@@ -44,7 +44,7 @@ use app\views\form\Form;
 			</div>
 
 			<div class="border-primary border-top mx-auto my-4 position-relative text-align-center w-50">
-				<div class="bg-secondary d-inline-block position-absolute px-2 start-50 top-50 translate-middle">Or</div>
+				<div class="bg-light d-inline-block position-absolute px-2 start-50 top-50 translate-middle">Or</div>
 			</div>
 
 			<div class="mb-3">

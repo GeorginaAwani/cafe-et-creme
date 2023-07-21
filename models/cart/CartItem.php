@@ -2,7 +2,7 @@
 
 namespace app\models\cart;
 
-use app\core\db\DBModel;
+use app\core\DBModel;
 use app\core\exceptions\FormException;
 use app\models\products\Container;
 
@@ -20,7 +20,7 @@ class CartItem extends DBModel
 	protected array $drinks;
 	protected array $toppings;
 
-	public static function tableName(): string
+	public static function table(): string
 	{
 		return 'cart_items';
 	}

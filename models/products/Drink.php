@@ -2,19 +2,22 @@
 
 namespace app\models\products;
 
-use app\core\db\DBModel;
+use PDO;
+use app\core\DBModel;
+use app\core\Application;
+use app\models\cart\Cart;
 
 class Drink extends DBModel
 {
 	public string $name = '';
 	public string $description = '';
 	public float $price = 0.0;
-	public int $category = 0;
+	public int|string $category = null;
 	public bool $is_alcoholic = false;
 	public int $quantity_in_store = 0;
 	public array|string $image = [];
 
-	public static function tableName(): string
+	public static function table(): string
 	{
 		return 'drinks';
 	}
@@ -24,23 +27,81 @@ class Drink extends DBModel
 		return ['name', 'description', 'price', 'category', 'is_alcoholic', 'image',];
 	}
 
-	public function save()
+	private function rules()
 	{
-		$rules = [
-			'name' => [self::RULE_REQUIRED],
-			'description' => [self::RULE_REQUIRED],
-			'price' => [self::RULE_REQUIRED, self::RULE_PRICE],
+		return [
+			'name' => [],
+			'description' => [],
+			'price' => [, self::RULE_PRICE],
 			'category' => [
-				self::RULE_REQUIRED,
 				[self::RULE_EXISTS, 'column' => 'id', 'table' => 'category', 'record' => 'category']
 			],
-			'is_alcoholic' => [self::RULE_REQUIRED],
-			'image' => [self::RULE_REQUIRED, self::RULE_IMAGE],
+			'is_alcoholic' => [],
+			'image' => [, self::RULE_IMAGE],
 		];
+	}
 
-		$this->validate($rules);
+	public function new()
+	{
+		$this->validate($this->makeRequired($this->rules()));
 
-		$this->image = $this->saveFile($this->image);
-		return parent::save();
+		$this->image = $this->saveFile($this->image, 'drinks');
+
+		return parent::create();
+	}
+
+	/**
+	Get a record of this model from database
+	 **/
+	public function get()
+	{
+		$Cart = new Cart;
+		$cartId = $Cart->retrieve();
+
+		$sql = "CALL GetDrinkAgainstCart($cartId, {$this->id})";
+
+		$query = Application::$App->DB->query($sql);
+
+		return [
+			'drink' => $query->fetchObject(_Drink::class),
+		];
+	}
+
+	/**
+	Edit an existing record of this model
+	 **/
+	public function edit()
+	{
+		return parent::update();
+	}
+
+	/**
+	Delete a record of this model
+	 **/
+	public function remove()
+	{
+		return parent::delete();
+	}
+
+	/**
+	Get records of this model
+	 **/
+	public function retrieve()
+	{
+		$Cart = new Cart;
+		$cartId = $Cart->retrieve();
+
+		$category = $this->category ?? 'NULL';
+		$search = $this->search ?? 'NULL';
+		$offset = ($this->page * 15) - 15;
+
+		$sql = "CALL GetDrinksAgainstCart($cartId, '$category', '$search', $offset)";
+
+		$query = Application::$App->DB->query($sql);
+
+		return [
+			'drinks' => $query->fetchAll(PDO::FETCH_CLASS, _Drink::class),
+			'pages' => $this->pageMap()
+		];
 	}
 }

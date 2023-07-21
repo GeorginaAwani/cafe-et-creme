@@ -54,7 +54,13 @@ class Application
 
 	public function run()
 	{
-		$this->Router->resolve();
+		try {
+			$data = $this->Router->resolve();
+
+			$this->Response->sendSuccess($data);
+		} catch (\Throwable $e) {
+			$this->Response->sendError($e);
+		}
 	}
 
 	public static function isGuest()

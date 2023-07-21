@@ -2,7 +2,7 @@
 
 namespace app\models\cart;
 
-use app\core\db\DBModel;
+use app\core\DBModel;
 use app\models\products\Topping;
 
 class CartItemTopping extends DBModel
@@ -10,7 +10,7 @@ class CartItemTopping extends DBModel
 	public int $item_id = 0;
 	public int $topping_id = 0;
 
-	public static function tableName(): string
+	public static function table(): string
 	{
 		return 'cart_item_toppings';
 	}

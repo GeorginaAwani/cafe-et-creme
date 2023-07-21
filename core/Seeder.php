@@ -2,7 +2,7 @@
 
 namespace app\core;
 
-use app\core\db\DBModel;
+use app\core\DBModel;
 use app\core\Migration;
 use app\core\SeederDataArray;
 

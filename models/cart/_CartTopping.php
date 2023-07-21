@@ -12,7 +12,7 @@ use app\models\products\Topping;
 class _CartToppings extends _CartItem
 {
 
-	public static function tableName(): string
+	public static function table(): string
 	{
 		return 'vw_cart_item_toppings';
 	}

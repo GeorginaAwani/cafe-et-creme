@@ -11,7 +11,7 @@ use app\models\products\Drink;
  */
 class _CartDrink extends _CartItem
 {
-	public static function tableName(): string
+	public static function table(): string
 	{
 		return 'vw_cart_item_drinks';
 	}

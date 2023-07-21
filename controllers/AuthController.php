@@ -14,60 +14,45 @@ class AuthController extends Controller
 		$this->layout = 'auth';
 	}
 
-	public function renderLogin(): void
-	{
-		die($this->render('login'));
-	}
-
-	public function renderSignup(): void
-	{
-		die($this->render('signup'));
-	}
-
-	public function handleLogin()
+	public function login()
 	{
 		// use is logging in
 		if ($this->request()->isPost() && $this->request()->isAPIRequest()) {
-			try {
-				$User = new User;
-				$Login = new Login;
-				$Login->load();
+			$User = new User;
+			$Login = new Login;
+			$Login->load();
 
-				if ($Login->login($User)) {
-					$this->response()->sendSuccess([
-						'message' => "You're now logged in",
-						'redirect' => '/dashboard'
-					]);
-				} else {
-					throw new FormException("Something went wrong");
-				}
-			} catch (\Throwable $e) {
-				$this->response()->sendError($e);
+			if ($Login->login($User)) {
+				return $this->response()->sendSuccess([
+					'message' => "You're now logged in",
+					'redirect' => '/dashboard'
+				]);
+			} else {
+				throw new FormException("Something went wrong");
 			}
 		}
+
+		echo $this->render('login');
 	}
 
-	public function handleSignup()
+	public function signup()
 	{
 		// user is submitting the form
 		if ($this->request()->isPost() && $this->request()->isAPIRequest()) {
-			try {
-				// create an instance of the user class
-				$User = new User;
-				$User->load(); // load data from form into model
+			// create an instance of the user class
+			$User = new User;
+			$User->load(); // load data from form into model
 
-				if ($User->new()) {
-					$this->response()->sendSuccess([
-						'message' => "Account created successfully",
-						'redirect' => '/login'
-					]);
-				} else {
-					throw new FormException("Failed to create account");
-				}
-			} catch (\Throwable $e) {
-				$this->response()->sendError($e);
-				exit;
+			if ($User->new()) {
+				$this->response()->sendSuccess([
+					'message' => "Account created successfully",
+					'redirect' => '/login'
+				]);
+			} else {
+				throw new FormException("Failed to create account");
 			}
 		}
+
+		echo $this->render('signup');
 	}
 }

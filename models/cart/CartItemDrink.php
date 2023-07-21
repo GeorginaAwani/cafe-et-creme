@@ -2,14 +2,14 @@
 
 namespace app\models\cart;
 
-use app\core\db\DBModel;
+use app\core\DBModel;
 
 class CartItemDrink extends DBModel
 {
 	public int $item_id = 0;
 	public int $drink_id = 0;
 
-	public static function tableName(): string
+	public static function table(): string
 	{
 		return 'cart_item_drinks';
 	}

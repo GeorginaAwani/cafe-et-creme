@@ -2,7 +2,7 @@
 
 namespace app\models\products;
 
-use app\core\db\DBModel;
+use app\core\DBModel;
 
 class Topping extends DBModel
 {
@@ -10,7 +10,8 @@ class Topping extends DBModel
 	public string $description = '';
 	public array|string $image = [];
 	public float $price = 0.0;
-	public static function tableName(): string
+
+	public static function table(): string
 	{
 		return 'toppings';
 	}
@@ -20,18 +21,55 @@ class Topping extends DBModel
 		return ['name', 'description', 'price', 'image'];
 	}
 
-	public function save()
+	private function rules()
 	{
-		$rules = [
-			'name' => [self::RULE_REQUIRED],
-			'description' => [self::RULE_REQUIRED],
-			'image' => [self::RULE_REQUIRED, self::RULE_IMAGE],
-			'price' => [self::RULE_REQUIRED, self::RULE_PRICE]
+		return [
+			'name' => [],
+			'description' => [],
+			'image' => [self::RULE_IMAGE],
+			'price' => [self::RULE_PRICE]
 		];
+	}
 
-		$this->validate($rules);
+	public function new()
+	{
+		$this->validate($this->makeRequired($this->rules()));
 
-		$this->image = $this->saveFile($this->image);
-		return parent::save();
+		$this->image = $this->saveFile($this->image, 'toppings');
+		return parent::create();
+	}
+
+	/**
+	Get a record of this model from database
+	 **/
+	public function get()
+	{
+		return parent::read();
+	}
+
+	/**
+	Edit an existing record of this model
+	 **/
+	public function edit()
+	{
+		$this->validate($this->rules());
+
+		return parent::update();
+	}
+
+	/**
+	Delete a record of this model
+	 **/
+	public function remove()
+	{
+		return parent::delete();
+	}
+
+	/**
+	Get records of this model
+	 **/
+	public function retrieve()
+	{
+		return ['toppings' => parent::all()];
 	}
 }

@@ -8,6 +8,8 @@ use app\core\db\Database;
 abstract class DBModel extends Model
 {
 	public int $id;
+	public string $search = '';
+	public int $page = 1;
 
 	/**
 	 * Name of corresponding database table
@@ -18,7 +20,7 @@ abstract class DBModel extends Model
 	/**
 	 * The attributes listed here can be inserted into the database
 	 */
-	abstract public function attributes(): array;
+	abstract protected function attributes(): array;
 
 	/**
 	 * Returns current database connection
@@ -27,6 +29,18 @@ abstract class DBModel extends Model
 	protected function db(): Database
 	{
 		return Application::$App->DB;
+	}
+
+	/**
+	 * Get page maps
+	 */
+	protected function pageMap()
+	{
+		return [
+			'prev' => ($this->page - 1),
+			'current' => $this->page,
+			'next' => ($this->page + 1),
+		];
 	}
 
 	/**
@@ -129,7 +143,7 @@ abstract class DBModel extends Model
 	 * @param mixed $columns
 	 * @return array
 	 */
-	public function all(?string $where = null, ?array $params = null, ?array $columns = null, ?array $others = []): array
+	protected function all(?string $where = null, ?array $params = null, ?array $columns = null, ?array $others = []): array
 	{
 		return $this->get_from_table($where, $params, $columns, $others)->fetchAll(PDO::FETCH_CLASS, static::class);
 	}
@@ -183,4 +197,19 @@ abstract class DBModel extends Model
 	 * Delete record
 	 */
 	abstract public function remove();
+
+	/**
+	 * Save a file to the filesystem
+	 * @param array $image
+	 * @param string $path
+	 * @return string
+	 */
+	protected function saveFile(array $image, string $path): string
+	{
+		$file = "images/$path/" . md5(uniqid(mt_rand(0, 100000))) . '.' . pathinfo($image['name']);
+
+		move_uploaded_file($image['tmp_name'], Application::$ROOT . "/public/$file");
+
+		return $file;
+	}
 }

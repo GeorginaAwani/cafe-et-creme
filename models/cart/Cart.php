@@ -3,7 +3,7 @@
 namespace app\models\cart;
 
 use app\core\Application;
-use app\core\db\DBModel;
+use app\core\DBModel;
 
 /**
  * Creates and manages cart of user
@@ -16,7 +16,7 @@ class Cart extends DBModel
 	protected const STATUS_CHECKED_OUT = 2;
 	public const T_CART_ITEMS = 'cart_items';
 
-	protected ?int $user_id;
+	protected ?int $user_id = null;
 	protected int $status;
 
 	public function __construct()
@@ -24,7 +24,7 @@ class Cart extends DBModel
 		$this->status = self::STATUS_ACTIVE;
 	}
 
-	public static function tableName(): string
+	public static function table(): string
 	{
 		return 'carts';
 	}
@@ -47,35 +47,61 @@ class Cart extends DBModel
 	{
 		if (!$this->user_id)
 			return null;
-		return $this->fetchOne("`user_id` = :user_id AND status = :status", [
+
+		return $this->all("`user_id` = :user_id AND status = :status", [
 			':user_id' => $this->user_id,
 			':status' => $this->status
-		]);
+		])[0];
 	}
 
 	/**
-	 * Creates a cart if none exists and returns the cart id
-	 * @return string|int
+	 * Get current user cart
+	 * @return string|null
 	 */
-	public function save()
+	public function get(): string|null
+	{
+		$cart = $this->fetch_cart_from_db();
+		return $cart->id ?? null;
+	}
+
+	/**
+	 * Creates a cart
+	 * @return string|int|null
+	 */
+	public function new()
 	{
 		// cannot fetch or create cart if user is not logged in
 		if (!Application::$App->user)
 			return null;
 
-		// check if a cart exists and
-		$cart = $this->fetch_cart_from_db();
-
-		if ($cart) return $cart->id;
-
 		$this->user_id = Application::$App->user->id;
 		$this->status = self::STATUS_ACTIVE;
 
-		return parent::save();
+		return parent::create();
 	}
 
-	public function checkout()
+	/**
+	 * Checkout of cart
+	 */
+	public function remove()
 	{
 		# code...
+	}
+
+	/**
+	 * 
+	 */
+	public function edit()
+	{
+		# code...
+	}
+
+	/**
+	 * Get cart, or create if not exists
+	 */
+	public function retrieve()
+	{
+		$cart = $this->get();
+		return $cart ?? $this->create();
 	}
 }

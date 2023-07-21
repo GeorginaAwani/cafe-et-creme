@@ -2,7 +2,7 @@
 
 namespace app\models;
 
-use app\core\db\DBModel;
+use app\core\DBModel;
 
 /**
  * Model formed from a view
