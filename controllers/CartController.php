@@ -1,12 +1,11 @@
 <?php
 
-use app\core\Application;
 use app\core\Controller;
-use app\core\exceptions\FormException;
-use app\models\Cart;
+use app\models\cart\Cart;
 use app\models\cart\CartItem;
 use app\models\cart\CartItemDrink;
 use app\models\cart\CartItemTopping;
+use app\core\exceptions\FormException;
 
 class CartController extends Controller
 {
@@ -44,32 +43,32 @@ class CartController extends Controller
 
 	/**
 	 * Create and load a cart item
-	 * @return Cart\CartItem
+	 * @return CartItem
 	 */
 	private function CartItem()
 	{
 		$Cart = new Cart;
 		$CartItem = new CartItem;
 		$CartItem->cart_id = $Cart->save();
-		$CartItem->loadData();
+		$CartItem->load();
 		return $CartItem;
 	}
 
 	/**
 	 * Create and load a cart drink item
-	 * @return Cart\CartItemDrink
+	 * @return CartItemDrink
 	 */
 	private function Drink()
 	{
 		$Drink = new CartItemDrink;
-		$Drink->loadData();
+		$Drink->load();
 		return $Drink;
 	}
 
 	private function Topping()
 	{
 		$Topping = new CartItemTopping;
-		$Topping->loadData();
+		$Topping->load();
 		return $Topping;
 	}
 
@@ -80,7 +79,7 @@ class CartController extends Controller
 	public function item()
 	{
 		// add to  cart
-		if (Application::$App->Request->isPost()) {
+		if ($this->request()->isPost()) {
 			try {
 				// cart item
 				$CartItem = $this->CartItem();
@@ -92,7 +91,7 @@ class CartController extends Controller
 			}
 		}
 		// remove from cart
-		elseif (Application::$App->Request->isDelete()) {
+		elseif ($this->request()->isDelete()) {
 			try {
 				$CartItem = $this->CartItem();
 				$CartItem->remove();
@@ -110,7 +109,7 @@ class CartController extends Controller
 	public function itemDrink()
 	{
 		// add drink to an item
-		if (Application::$App->Request->isPut()) {
+		if ($this->request()->isPut()) {
 			try {
 				// drink item
 				$Drink = $this->Drink();
@@ -132,7 +131,7 @@ class CartController extends Controller
 			}
 		}
 		// remove drink from an item
-		elseif (Application::$App->Request->isDelete()) {
+		elseif ($this->request()->isDelete()) {
 			try {
 				$Drink = $this->Drink();
 				if ($Drink->remove()) {
@@ -152,7 +151,7 @@ class CartController extends Controller
 	public function itemTopping()
 	{
 		// add topping to an item
-		if (Application::$App->Request->isPut()) {
+		if ($this->request()->isPut()) {
 			try {
 				// topping item
 				$Topping = $this->Topping();
@@ -175,7 +174,7 @@ class CartController extends Controller
 			}
 		}
 		// remove topping from an item
-		elseif (Application::$App->Request->isDelete()) {
+		elseif ($this->request()->isDelete()) {
 			try {
 				$Topping = $this->Topping();
 				if ($Topping->remove()) {

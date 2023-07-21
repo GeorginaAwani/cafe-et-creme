@@ -2,7 +2,7 @@
 
 namespace app\models;
 
-use app\core\db\DBModel;
+use app\core\DBModel;
 
 class Contact extends DBModel
 {
@@ -12,7 +12,7 @@ class Contact extends DBModel
 	public string $message = '';
 	public string $country_code = '';
 
-	public static function tableName(): string
+	public static function table(): string
 	{
 		return 'contact';
 	}
@@ -22,9 +22,9 @@ class Contact extends DBModel
 		return ['name', 'email', 'phone', 'message', 'country_code'];
 	}
 
-	public function save()
+	private function rules()
 	{
-		$rules = [
+		return [
 			'name' => [self::RULE_REQUIRED],
 			'email' => [self::RULE_REQUIRED, self::RULE_EMAIL],
 			'phone' => [
@@ -40,9 +40,47 @@ class Contact extends DBModel
 				[self::RULE_MAX, 'max' => 3]
 			]
 		];
+	}
 
-		$this->validate($rules);
+	/**
+	Create a new record of this model
+	 **/
+	public function new()
+	{
+		$this->validate($this->rules());
 
-		return parent::save();
+		return parent::create();
+	}
+
+	/**
+	Get a record of this model from database
+	 **/
+	public function get()
+	{
+		return parent::read();
+	}
+
+	/**
+	Edit an existing record of this model
+	 **/
+	public function edit()
+	{
+		return parent::update();
+	}
+
+	/**
+	Delete a record of this model
+	 **/
+	public function remove()
+	{
+		return parent::delete();
+	}
+
+	/**
+	Get records of this model
+	 **/
+	public function retrieve()
+	{
+		return parent::all();
 	}
 }

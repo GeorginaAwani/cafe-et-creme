@@ -2,7 +2,7 @@
 
 namespace app\models;
 
-use app\core\db\DBModel;
+use app\core\DBModel;
 
 class User extends DBModel
 {
@@ -14,7 +14,8 @@ class User extends DBModel
 	public string $confirm_password = '';
 	public string $status;
 
-	public static function tableName(): string
+
+	public static function table(): string
 	{
 		return 'users';
 	}
@@ -24,20 +25,58 @@ class User extends DBModel
 		return ['name', 'email', 'password', 'status'];
 	}
 
-	public function save()
+	private function rules()
 	{
-		$rules = [
-			'name' => [self::RULE_REQUIRED],
-			'email' => [self::RULE_REQUIRED, self::RULE_EMAIL, [self::RULE_UNIQUE, 'class' => self::class, 'attribute' => 'email']],
-			'password' => [self::RULE_REQUIRED],
-			'confirm_password' => [self::RULE_REQUIRED, [self::RULE_MATCH, 'attribute' => 'password']]
+		return [
+			'name' => [],
+			'email' => [self::RULE_EMAIL, [self::RULE_UNIQUE, 'class' => self::class, 'attribute' => 'email']],
+			'password' => [],
+			'confirm_password' => [[self::RULE_MATCH, 'attribute' => 'password']]
 		];
+	}
 
-		$this->validate($rules);
+	/**
+	Create a new record of this model
+	 **/
+	public function new()
+	{
+		$this->validate($this->makeRequired($this->rules()));
 
 		$this->status = self::STATUS_ACTIVE;
 		$this->password = password_hash($this->password, PASSWORD_BCRYPT);
 
-		return parent::save();
+		return parent::create();
+	}
+
+	/**
+	Get a record of this model from database
+	 **/
+	public function get()
+	{
+		return parent::read();
+	}
+
+	/**
+	Edit an existing record of this model
+	 **/
+	public function edit()
+	{
+		return parent::update();
+	}
+
+	/**
+	Delete a record of this model
+	 **/
+	public function remove()
+	{
+		return parent::delete();
+	}
+
+	/**
+	Get records of this model
+	 **/
+	public function retrieve()
+	{
+		return parent::all();
 	}
 }

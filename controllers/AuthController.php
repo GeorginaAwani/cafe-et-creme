@@ -31,7 +31,7 @@ class AuthController extends Controller
 			try {
 				$User = new User;
 				$Login = new Login;
-				$Login->loadData();
+				$Login->load();
 
 				if ($Login->login($User)) {
 					$this->response()->sendSuccess([
@@ -54,15 +54,15 @@ class AuthController extends Controller
 			try {
 				// create an instance of the user class
 				$User = new User;
-				$User->loadData(); // load data from form into model
+				$User->load(); // load data from form into model
 
-				if ($User->save()) {
+				if ($User->new()) {
 					$this->response()->sendSuccess([
 						'message' => "Account created successfully",
 						'redirect' => '/login'
 					]);
 				} else {
-					throw new FormException("Failed to create accunt");
+					throw new FormException("Failed to create account");
 				}
 			} catch (\Throwable $e) {
 				$this->response()->sendError($e);

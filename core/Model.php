@@ -19,7 +19,7 @@ abstract class Model
 	public const RULE_IN = 11;
 	public const RULE_DATETIME = 12;
 
-	public function loadData()
+	public function load()
 	{
 		// get request body
 		$data = Application::$App->Request->body();
@@ -62,9 +62,22 @@ abstract class Model
 	}
 
 	/**
+	 * Make fields in a rule set required
+	 */
+	protected function makeRequired(array $rules, array $apply = []): array
+	{
+		$ruleSet = array_diff_key($rules, array_flip($apply));
+
+		return array_map(function ($rule) {
+			array_unshift($rule, self::RULE_REQUIRED);
+			return $rule;
+		}, $ruleSet);
+	}
+
+	/**
 	 * Validate input from user
 	 */
-	public function validate(array $rules): void
+	protected function validate(array $rules): void
 	{
 		// iterate through defined rules
 		foreach ($rules as $attribute => $rules) {

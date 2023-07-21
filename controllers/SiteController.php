@@ -37,7 +37,7 @@ class SiteController extends Controller
 		if (Application::$App->Request->isPost() && Application::$App->Request->isAPIRequest()) {
 			try {
 				$Contact = new Contact;
-				$Contact->loadData();
+				$Contact->load();
 
 				if ($Contact->save()) {
 					$this->response()->sendSuccess([

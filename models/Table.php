@@ -2,11 +2,11 @@
 
 namespace app\models;
 
-use app\core\db\DBModel;
+use app\core\DBModel;
 
 class Table extends DBModel
 {
-	public static function tableName(): string
+	public static function table(): string
 	{
 		return 'tables';
 	}
@@ -16,21 +16,54 @@ class Table extends DBModel
 		return ['number', 'capacity', 'is_available', 'position'];
 	}
 
-	private function positions()
+	private function rules()
 	{
-		return ['window', 'bar', 'booth', 'entrance', 'outdoor', 'kitchen', 'lounge'];
+		return [
+			'number' => [self::RULE_NUMERIC],
+			'capacity' => [self::RULE_NUMERIC, [self::RULE_MIN, 'min' => 1], [self::RULE_MAX, 'max' => 12]],
+			'position' => [[self::RULE_IN, ['window', 'bar', 'booth', 'entrance', 'outdoor', 'kitchen', 'lounge']]]
+		];
 	}
 
-	public function save()
+	/**
+	Create a new record of this model
+	 **/
+	public function new()
 	{
-		$rules = [
-			'number' => [self::RULE_REQUIRED, self::RULE_NUMERIC],
-			'capacity' => [self::RULE_REQUIRED, self::RULE_NUMERIC, [self::RULE_MIN, 'min' => 1], [self::RULE_MAX, 'max' => 12]],
-			'position' => [self::RULE_REQUIRED, [self::RULE_IN, $this->positions()]]
-		];
+		$this->validate($this->makeRequired($this->rules()));
 
-		$this->validate($rules);
+		return parent::create();
+	}
 
-		return parent::save();
+	/**
+	Get a record of this model from database
+	 **/
+	public function get()
+	{
+		return parent::read();
+	}
+
+	/**
+	Edit an existing record of this model
+	 **/
+	public function edit()
+	{
+		return parent::update();
+	}
+
+	/**
+	Delete a record of this model
+	 **/
+	public function remove()
+	{
+		return parent::delete();
+	}
+
+	/**
+	Get records of this model
+	 **/
+	public function retrieve()
+	{
+		return parent::all();
 	}
 }

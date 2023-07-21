@@ -32,7 +32,7 @@ class MenuController extends Controller
 		if ($this->request()->isGet() && $this->request()->isAPIRequest()) {
 			try {
 				$Menu = new Menu;
-				$Menu->loadData();
+				$Menu->load();
 
 				// get drinks by category
 				$data = $Menu->drink($drink);
@@ -49,7 +49,7 @@ class MenuController extends Controller
 		if ($this->request()->isGet() && $this->request()->isAPIRequest()) {
 			try {
 				$Menu = new Menu;
-				$Menu->loadData();
+				$Menu->load();
 
 				$this->response()->sendSuccess($Menu->drinks());
 			} catch (\Throwable $e) {
