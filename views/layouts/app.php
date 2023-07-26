@@ -12,7 +12,7 @@ use app\views\form\Form;
 	<link rel="stylesheet" href="/css/app.css" />
 </head>
 
-<body class="bg-primary text-light">
+<body class="">
 	<nav class="navbar navbar-dark navbar-expand-lg bg-primary fixed-top py-3 border-bottom border-light" id="navbar">
 		<div class="container-fluid px-5">
 			<a class="navbar-brand font-script" href="/">Café et Crème</a>
@@ -70,19 +70,7 @@ use app\views\form\Form;
 	</nav>
 
 	<div class="d-flex flex-column justify-content-between pt-5" id="mainWrap">
-		<main id="main" class="mt-5">
-			<div class="container py-5">
-				{{CONTENT}}
-			</div>
-		</main>
-
-		<footer id="footer" class="py-3 bg-primary border-top border-light text-light">
-			<div class="container">
-				<div class="d-flex justify-content-end">
-					<?php include_once __DIR__ . '/../components/full-contact-list.php' ?>
-				</div>
-			</div>
-		</footer>
+		{{CONTENT}}
 	</div>
 </body>
 

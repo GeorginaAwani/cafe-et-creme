@@ -1,0 +1,15 @@
+<?php
+namespace app\resources;
+
+use app\core\Resource;
+
+class {{CLASS}} extends Resource{
+	public function toArray() : array{
+		/**
+		@var $model
+		**/
+		$model = $this->model;
+		
+		return [];
+	}
+}

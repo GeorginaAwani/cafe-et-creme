@@ -3,6 +3,7 @@
 namespace app\models\products;
 
 use app\core\DBModel;
+use app\resources\ContainerResource;
 
 class Container extends DBModel
 {
@@ -23,10 +24,10 @@ class Container extends DBModel
 	private function rules()
 	{
 		return [
-			'name' => [self::RULE_REQUIRED],
-			'description' => [self::RULE_REQUIRED],
-			'image' => [self::RULE_REQUIRED, self::RULE_IMAGE],
-			'price' => [self::RULE_REQUIRED, self::RULE_PRICE]
+			'name' => [],
+			'description' => [],
+			'image' => [self::RULE_IMAGE],
+			'price' => [self::RULE_PRICE]
 		];
 	}
 
@@ -44,7 +45,7 @@ class Container extends DBModel
 	 **/
 	public function get()
 	{
-		return parent::read();
+		return ['container' => (new ContainerResource(parent::read()))->toArray()];
 	}
 
 	/**
@@ -68,6 +69,8 @@ class Container extends DBModel
 	 **/
 	public function retrieve()
 	{
-		return parent::all();
+		return [
+			'containers' => ContainerResource::collection(parent::all())
+		];
 	}
 }

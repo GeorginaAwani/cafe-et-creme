@@ -3,6 +3,7 @@
 namespace app\models\products;
 
 use app\core\DBModel;
+use app\resources\ToppingResource;
 
 class Topping extends DBModel
 {
@@ -44,7 +45,7 @@ class Topping extends DBModel
 	 **/
 	public function get()
 	{
-		return parent::read();
+		return (new ToppingResource(parent::read()))->toArray();
 	}
 
 	/**
@@ -70,6 +71,6 @@ class Topping extends DBModel
 	 **/
 	public function retrieve()
 	{
-		return ['toppings' => parent::all()];
+		return ['toppings' => ToppingResource::collection(parent::all())];
 	}
 }

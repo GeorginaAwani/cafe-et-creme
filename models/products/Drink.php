@@ -2,6 +2,7 @@
 
 namespace app\models\products;
 
+use app\resources\DrinkResource;
 use PDO;
 use app\core\DBModel;
 use app\core\Application;
@@ -63,7 +64,7 @@ class Drink extends DBModel
 		$query = Application::$App->DB->query($sql);
 
 		return [
-			'drink' => $query->fetchObject(_Drink::class),
+			'drink' => (new DrinkResource($query->fetchObject(_Drink::class)))->toArray(),
 		];
 	}
 
@@ -100,7 +101,7 @@ class Drink extends DBModel
 		$query = Application::$App->DB->query($sql);
 
 		return [
-			'drinks' => $query->fetchAll(PDO::FETCH_CLASS, _Drink::class),
+			'drinks' => DrinkResource::collection($query->fetchAll(PDO::FETCH_CLASS, _Drink::class)),
 			'pages' => $this->pageMap()
 		];
 	}

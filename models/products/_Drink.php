@@ -11,12 +11,13 @@ use app\core\Model;
  */
 class _Drink extends Model
 {
+	public int $id;
 	public string $name = '';
 	public string $description = '';
 	public float $price = 0.0;
-	public int|string $category = 0;
+	public string $category = 0;
 	public bool $is_alcoholic = false;
 	public int $quantity_in_store = 0;
-	public array|string $image = [];
+	public string $image = '';
 	public ?int $quantity_in_cart = null;
 }

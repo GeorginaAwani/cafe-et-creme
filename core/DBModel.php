@@ -106,7 +106,7 @@ abstract class DBModel extends Model
 			$params = [];
 		}
 
-		$sql = "SELECT $columns FROM " . self::table() . " WHERE $where";
+		$sql = "SELECT $columns FROM " . static::table() . " WHERE $where";
 
 		if (!empty($others)) {
 			$otherSQL = ' ';
@@ -122,13 +122,12 @@ abstract class DBModel extends Model
 
 	/**
 	 * Get a record by id
-	 * @return \PDOStatement|bool
 	 */
-	protected function read(): \PDOStatement|bool
+	protected function read()
 	{
 		return $this->get_from_table("id = :id", [
 			':id' => $this->id
-		], null);
+		], null)->fetchObject(static::class);
 	}
 
 	/**

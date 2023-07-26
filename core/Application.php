@@ -40,14 +40,15 @@ class Application
 		$this->View = new View;
 
 		if ($userClass) {
-			/** @var User $user */
-			$user = new $userClass;
+			/** @var User $User */
+			$User = new $userClass;
 			// get user from session
 			$id = $this->Session->get('user');
 			if ($id) {
-				$uid = $user->fetchOne("id = :id", [':id' => $id]);
+				$User->id = $id;
+				$uid = $User->get();
 				if ($uid)
-					$this->user = $uid;
+					$this->user = $uid->id;
 			}
 		}
 	}
@@ -57,7 +58,7 @@ class Application
 		try {
 			$data = $this->Router->resolve();
 
-			$this->Response->sendSuccess($data);
+			if (!is_null($data)) $this->Response->sendSuccess($data);
 		} catch (\Throwable $e) {
 			$this->Response->sendError($e);
 		}

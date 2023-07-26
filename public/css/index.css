@@ -37,9 +37,14 @@ TYPOGRAPHY
 /**
 BUTTONS
 **/
+.fa-arrow-icon {
+	display: none;
+}
+
 .btn-arrow .fa-arrow-icon {
 	right: -2rem;
 	color: var(--bs-btn-border-color);
+	display: inline-block;
 }
 
 .btn-arrow::before {
@@ -57,7 +62,6 @@ BUTTONS
 .btn-arrow[class*="btn-outline"]:hover::before {
 	background-color: var(--bs-btn-hover-border-color);
 }
-
 
 .btn-arrow::before {
 	content: '';

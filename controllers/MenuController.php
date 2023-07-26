@@ -16,7 +16,7 @@ class MenuController extends Controller
 		echo $this->render('menu/index');
 	}
 
-	public function menu()
+	public function menu(string $category)
 	{
 		echo $this->render('menu/menu');
 	}

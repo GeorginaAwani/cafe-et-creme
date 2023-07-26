@@ -2,6 +2,7 @@
 
 namespace app\models\products;
 
+use app\resources\CategoryResource;
 use app\core\DBModel;
 
 class Category extends DBModel
@@ -37,9 +38,9 @@ class Category extends DBModel
 
 	public function get()
 	{
-		return $this->all("name = :name", [
+		return (new CategoryResource($this->all("name = :name", [
 			':name' => $this->name
-		])[0];
+		])[0]))->toArray();
 	}
 
 	public function edit()
@@ -48,7 +49,7 @@ class Category extends DBModel
 
 	public function retrieve()
 	{
-		return $this->all();
+		return ['categories' => CategoryResource::collection($this->all())];
 	}
 
 	public function remove()

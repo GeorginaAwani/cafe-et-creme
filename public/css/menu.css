@@ -1,26 +1,5 @@
-.rounded-xl {
-	border-radius: 6.25rem;
-}
-
-#menuNav .nav-link.active {
-	border-color: var(--bs-secondary);
-}
-
-#menuNav .nav-link {
-	--bs-nav-link-color: #fff;
-	--bs-nav-link-hover-color: var(--bs-secondary);
-	border: 1px solid transparent;
-}
-
-.menuitem img {
-	max-width: 50%;
-	max-height: 14rem;
-}
-
-.menuitem .menuitem-btn {
-	--bs-btn-bg: var(--bs-danger-dark);
-	border-color: transparent !important;
-	--bs-btn-hover-bg: var(--bs-danger);
-	width: 3.125rem;
-	height: 3.125rem;
+#heroIcon {
+	right: 0;
+	bottom: 0;
+	width: 55%;
 }
