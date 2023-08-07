@@ -53,7 +53,7 @@ class User extends DBModel
 	 **/
 	public function get()
 	{
-		return parent::read();
+		// return parent::read();
 	}
 
 	/**
@@ -61,7 +61,7 @@ class User extends DBModel
 	 **/
 	public function edit()
 	{
-		return parent::update();
+		// return parent::update();
 	}
 
 	/**
@@ -69,7 +69,7 @@ class User extends DBModel
 	 **/
 	public function remove()
 	{
-		return parent::delete();
+		// return parent::delete();
 	}
 
 	/**
@@ -77,6 +77,6 @@ class User extends DBModel
 	 **/
 	public function retrieve()
 	{
-		return parent::all();
+		// return parent::all();
 	}
 }

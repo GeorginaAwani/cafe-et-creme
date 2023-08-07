@@ -1,9 +1,13 @@
 <script type="module" src="/js/menu.js"></script>
 
-<div class="py-5 mt-5">
-	<ul id="categories">
+<div class="bg-light">
+	<div class="container">
+		<div class="py-5 mt-5">
+			<ul id="categories" class="nav">
 
-	</ul>
+			</ul>
+		</div>
+	</div>
 </div>
 
 <footer id="footer" class="py-3 bg-primary border-top border-light text-light">

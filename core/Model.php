@@ -19,6 +19,10 @@ abstract class Model
 	public const RULE_IN = 11;
 	public const RULE_DATETIME = 12;
 
+	/**
+	 * Load user data into corresponding model properties
+	 * @return void
+	 */
 	public function load()
 	{
 		// get request body

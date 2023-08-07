@@ -13,7 +13,7 @@ class Drink extends DBModel
 	public string $name = '';
 	public string $description = '';
 	public float $price = 0.0;
-	public int|string $category = null;
+	public int|string $category = '';
 	public bool $is_alcoholic = false;
 	public int $quantity_in_store = 0;
 	public array|string $image = [];
@@ -33,12 +33,12 @@ class Drink extends DBModel
 		return [
 			'name' => [],
 			'description' => [],
-			'price' => [, self::RULE_PRICE],
+			'price' => [self::RULE_PRICE],
 			'category' => [
 				[self::RULE_EXISTS, 'column' => 'id', 'table' => 'category', 'record' => 'category']
 			],
 			'is_alcoholic' => [],
-			'image' => [, self::RULE_IMAGE],
+			'image' => [self::RULE_IMAGE],
 		];
 	}
 
@@ -98,7 +98,7 @@ class Drink extends DBModel
 
 		$sql = "CALL GetDrinksAgainstCart($cartId, '$category', '$search', $offset)";
 
-		$query = Application::$App->DB->query($sql);
+		$query = $this->db()->query($sql);
 
 		return [
 			'drinks' => DrinkResource::collection($query->fetchAll(PDO::FETCH_CLASS, _Drink::class)),

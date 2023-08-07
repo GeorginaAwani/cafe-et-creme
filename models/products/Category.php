@@ -9,7 +9,7 @@ class Category extends DBModel
 {
 	public string $name = '';
 	public string $description = '';
-	public string $image = '';
+	public string|array $image = [];
 
 	public static function table(): string
 	{
@@ -25,7 +25,8 @@ class Category extends DBModel
 	{
 		return [
 			'name' => [],
-			'description' => []
+			'description' => [],
+			'image' => [self::RULE_IMAGE],
 		];
 	}
 
@@ -33,7 +34,9 @@ class Category extends DBModel
 	{
 		$this->validate($this->makeRequired($this->rules()));
 
-		$this->create();
+		$this->image = $this->saveFile($this->image, 'categories');
+
+		return $this->create();
 	}
 
 	public function get()
@@ -49,7 +52,8 @@ class Category extends DBModel
 
 	public function retrieve()
 	{
-		return ['categories' => CategoryResource::collection($this->all())];
+		$categories = CategoryResource::collection($this->all());
+		return ['categories' => $categories];
 	}
 
 	public function remove()

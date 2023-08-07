@@ -1,5 +1,8 @@
 // import $ from "jquery";
 
+import { _get } from "./services/ajax.js";
+import { fade, hide, show } from "./services/display.js";
+
 $(function () {
   interface CarouselItem {
     title: string;
@@ -47,35 +50,40 @@ $(function () {
     },
   ];
 
-  const products: Product[] = [
-    {
-      image: "/images/coffee.png",
-      name: "Cappuccino",
-      price: 6000,
-    },
-    {
-      image: "/images/orange-juice.png",
-      name: "Fresh orange juice",
-      price: 3500,
-    },
-    {
-      image: "/images/cocktail.png",
-      name: "Mojito Cocktail",
-      price: 4500,
-    },
-  ];
-
   const heroTitle = $("#heroTitle");
   const heroSubTitle = $("#heroSubTitle");
   const cat = $("#heroCATBtn .btn");
   const productName = $("#productName");
   const productPrice = $("#productPrice");
-
   const imgWrap = $("#productImage");
 
-  $("#carouselControls .btn").on("click", function () {
-    const $this = $(this);
-    const index = $this.parent().index();
+  async function getHomeProducts() {
+    const res = await _get("home");
+
+    hide($("#loader"));
+
+    show($("#product"));
+
+    // @ts-ignore
+    const products: Product[] = res.drinks;
+
+    showProduct(0, products, $("#carouselControls .btn").first());
+
+    $("#carouselControls .btn").on("click", function () {
+      const $this = $(this);
+      const index = $this.parent().index();
+
+      showProduct(index, products, $this);
+    });
+  }
+
+  getHomeProducts();
+
+  function showProduct(
+    index: number,
+    products: Product[],
+    btn: JQuery<HTMLElement>
+  ) {
     const item = carousel[index];
 
     if (!item) return;
@@ -83,8 +91,8 @@ $(function () {
     const product = products[index];
 
     $("#hero").css({ backgroundImage: `url(${item.image})` });
-    $this.attr("aria-current", "true").addClass("active");
-    $this
+    btn.attr("aria-current", "true").addClass("active");
+    btn
       .parent()
       .siblings()
       .children(".btn")
@@ -96,25 +104,20 @@ $(function () {
     changeText(heroSubTitle, item.subTitle);
     cat.attr({ label: item.button.label, href: item.button.href });
 
-    let image = imgWrap.addClass("opacity-0");
-
     if (product) {
-      // change image
-      setTimeout(function () {
-        image.children("img").attr("src", product.image);
-        image.removeClass("opacity-0");
-      }, 250);
+      fade(imgWrap, () => {
+        imgWrap.children("img").attr("src", product.image);
+      });
 
       // change products
       changeText(productName, product.name);
       changeText(productPrice, "N" + product.price.toLocaleString());
     }
-  });
+  }
 
   function changeText(element: JQuery, text: string) {
-    element.addClass("opacity-0");
-    setTimeout(function () {
-      element.text(text).removeClass("opacity-0");
-    }, 250);
+    fade(element, () => {
+      element.text(text);
+    });
   }
 });

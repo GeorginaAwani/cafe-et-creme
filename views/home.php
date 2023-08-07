@@ -33,14 +33,20 @@ use app\views\form\Form;
 						<div class="h4 fw-light mb-0">Some of our customer favourites</div>
 					</div>
 
-					<div id="product" class="text-center mb-3">
-						<div id="productImage" class="mb-2">
-							<img src="/images/coffee.png" alt="" class="mx-auto">
+					<div id="loader" class="text-center">
+						<div class="spinner-border text-primary" role="status">
+							<span class="visually-hidden">Loading...</span>
 						</div>
-						<div id="productName" class="h3 font-script text-primary mb-2 dynamic-text">Cappuccino</div>
+					</div>
+
+					<div id="product" class="text-center mb-3 visually-hidden">
+						<div id="productImage" class="mb-2">
+							<img src="/assets/images/drinks/coffee.png" alt="" class="mx-auto">
+						</div>
+						<div id="productName" class="h3 font-script text-primary mb-2 dynamic-text"></div>
 						<div class="position-relative d-inline-block">
 							<div id="productPriceTag" class="position-absolute top-50 translate-middle-y"></div>
-							<div id="productPrice" class="d-inline-block font-script h5 mb-0 pb-2 pe-3 ps-4 pt-2 text-light dynamic-text">N6,000</div>
+							<div id="productPrice" class="d-inline-block font-script h5 mb-0 pb-2 pe-3 ps-4 pt-2 text-light dynamic-text"></div>
 						</div>
 					</div>
 

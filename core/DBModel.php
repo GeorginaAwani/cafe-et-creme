@@ -147,6 +147,11 @@ abstract class DBModel extends Model
 		return $this->get_from_table($where, $params, $columns, $others)->fetchAll(PDO::FETCH_CLASS, static::class);
 	}
 
+	public function where(string $where, array $param)
+	{
+		return $this->all($where, $param);
+	}
+
 	/**
 	 * Get all
 	 */
@@ -205,9 +210,9 @@ abstract class DBModel extends Model
 	 */
 	protected function saveFile(array $image, string $path): string
 	{
-		$file = "images/$path/" . md5(uniqid(mt_rand(0, 100000))) . '.' . pathinfo($image['name']);
+		$file = "/assets/products/$path/" . md5(uniqid(mt_rand(0, 100000))) . '.' . pathinfo($image['name']);
 
-		move_uploaded_file($image['tmp_name'], Application::$ROOT . "/public/$file");
+		move_uploaded_file($image['tmp_name'], Application::$ROOT . "/public$file");
 
 		return $file;
 	}

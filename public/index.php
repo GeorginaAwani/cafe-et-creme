@@ -19,6 +19,9 @@ $App = new Application(dirname(__DIR__), User::class);
 
 $App->Router->get('/', [SiteController::class, 'home']);
 
+// get home products
+$App->Router->get('/api/home', [SiteController::class, 'index']);
+
 $App->Router->get('/about', [SiteController::class, 'about']);
 
 $App->Router->get('/contact', [ContactController::class, 'index']);

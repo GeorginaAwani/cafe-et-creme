@@ -21,7 +21,7 @@ class Login extends Model
 
 		$this->validate($rules);
 
-		$user = $User->all("email = :email", [':email' => $this->email])[0];
+		$user = $User->where("email = :email", [':email' => $this->email])[0];
 
 		if (!$user || !password_verify($this->password, $user->password)) {
 			throw new FormException("Invalid log in credentials");
